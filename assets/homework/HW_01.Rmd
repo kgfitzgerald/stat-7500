@@ -1,0 +1,39 @@
+---
+title: "Homework 01"
+subtitle: "Sections 2.1 - 2.6"
+author: "STAT 5700 - Probability"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instructions
+
+- Homework problems come from the 7th edition of the text *Mathematical Statistics with Applications* by Wackerly, Mendenhall, and Scheaffer
+- You are responsible for understanding the concepts covered in all problems listed in a homework assignment, but only even-numbered problems should be turned in. 
+- Be NEAT and show work to support your answers. Points will be deducted if your answer is not adequately supported or the work cannot be readily followed. 
+- You are encouraged to work together on homework assignments, but each person must write up and turn in their own work and solutions. 
+- You will turn in this assignment by scanning your work and uploading a single pdf to Blackboard. 
+- Note there is a corresponding R Lab (Lab 01) that will be due at the same time as this assignment (HW 01). 
+
+## Problems to do (responsible for content, but not collected/graded)
+
++ Section 2.3: 1
+
++ Section 2.4: 9, 15, 17, 19
+
++ Section 2.5: 25, 31
+
++ Section 2.6: 37, 41, 43, 51, 57, 59, 61
+
+## Problems to submit
+
++ Section 2.3: 4, 8
+
++ Section 2.4: 14
+
++ Section 2.5: 26, 28, 30
+
++ Section 2.6: 38, 42, 46, 48, 50, 58, 64, 68
