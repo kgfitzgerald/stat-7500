@@ -24,7 +24,7 @@ seo:
 
 ### Course website
 
-This website serves as the central hub for all files for the course as well as weekly agendas & announcements. Use the navigation pane to view [Lecture Slides](kgfitzgerald.github.io/stat-7500/lecture_slides/) and [Assignments](kgfitzgerald.github.io/stat-7500/assignments/).
+This website serves as the central hub for all files for the course as well as weekly agendas & announcements. Use the navigation pane to view [in-class lecture slides & practice code](kgfitzgerald.github.io/stat-7500/lecture_slides/) and [Assignments](kgfitzgerald.github.io/stat-7500/assignments/).
 
 ### Blackboard
 

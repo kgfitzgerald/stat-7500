@@ -18,25 +18,19 @@ nav_order: 4
 
 ---
 
-Most weeks, you will have 4 things to submit by Thursdays at 11:59pm. See below for details and links to the assignments. 
+Most weeks, you will have 3 things to submit by Wednesdays at 6:15pm. See below for details and links to the assignments. 
 
-## Homework
+## Homework (due Wednesdays, 6:15pm)
 
-The links below provide the assigned problems for each homework. You may type or hand-write your work, but you should submit a single pdf to the corresponding assignment on Blackboard.
+Instructions and/or data files for each homework are provided by the links below. You should submit your completed file(s) to the corresponding assignment on Blackboard.
 
-[HW 01](https://kgfitzgerald.github.io/stat-5700/assets/homework/HW_01.pdf)
++ [SAS HW 01](https://kgfitzgerald.github.io/stat-7500/assets/homework/SAS_HW_01.docx)
 
-## Labs
+## Reading annotations (due Wednesdays, 6:15pm)
 
-The links below take you to a template Quarto (.qmd) file for each lab. You should download the .qmd and place it in the STAT_5700 folder you created on your computer. Complete the lab by typing your code & answers in the .qmd. You will turn in a rendered .html file to Blackboard. 
+Most weeks you will be assigned an article, book chapter, and/or video about applications of statistics & data science and/or ethical issues in the field. Rather than a traditional discussion board, we will use Perusall, a community annotation tool, where you can engage with the text by highlighting, commenting, asking questions, and responding to your peers' comments/questions, all on a shared document. You can access these assignments [here](https://elearning.villanova.edu/webapps/blackboard/content/listContent.jsp?course_id=_183083_1&content_id=_5567837_1), or by navigating in Blackboard to Submit Assignments > Perusall - Reading Annotations. 
 
-[Lab 01](https://kgfitzgerald.github.io/stat-5700/assets/labs/Lab_01.qmd)
+## Weekly check-ins (due Thursdays, 11:59pm)
 
-## Reading annotations
-
-Most weeks you will be assigned an article, book chapter, and/or video about applications of probability & statistics and/or ethical issues in the field. Rather than a traditional discussion board, we will use Perusall, a community annotation tool, where you can engage with the text by highlighting, commenting, asking questions, and responding to your peers' comments/questions, all on a shared document. You can access these assignments [here](https://elearning.villanova.edu/webapps/blackboard/content/listContent.jsp?course_id=_182880_1&content_id=_5566839_1), or by navigating in Blackboard to Submit Assignments > Perusall - Reading Annotations. 
-
-## Weekly check-ins
-
-Finally, each week you should fill out the brief weekly check-in surveys, which are made available at the end of class each Thursday and due at 11:59pm. It consists of a few short questions for you to reflect and provide feedback about the course each week; it should not take more than 5 minutes to complete. You can access these surveys [here](https://elearning.villanova.edu/webapps/blackboard/content/listContentEditable.jsp?content_id=_5566838_1&course_id=_182880_1) or by navigating in Blackboard to Submit Assignments > Submit Weekly Check-ins.
+Finally, each week you should fill out the brief weekly check-in surveys, which are made available at the end of class each Wednesday and due at 11:59pm the next day. It consists of a few short questions for you to reflect and provide feedback about the course each week; it should not take more than 5 minutes to complete. You can access these surveys [here](https://elearning.villanova.edu/webapps/blackboard/content/listContentEditable.jsp?content_id=_5566838_1&course_id=_182880_1) or by navigating in Blackboard to Submit Assignments > Submit Weekly Check-ins.
 
