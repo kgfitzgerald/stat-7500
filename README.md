@@ -36,7 +36,7 @@ This website serves as the central hub for all files for the course as well as w
 
 ## Important Links
 
-[Syllabus](/stat-7500/assets/STAT 7500 Fitzgerald F25.pdf) 
+[Syllabus](stat-7500/assets/STAT 7500 Fitzgerald F25.pdf)
 
 [Blackboard - home page](https://elearning.villanova.edu/ultra/courses/_183083_1/cl/outline)
 
@@ -46,7 +46,7 @@ This website serves as the central hub for all files for the course as well as w
 
 [Extension request form](https://forms.office.com/r/0kB3JrmDy8)
 
-[R & RStudio Getting Started](/stat-7500/rstudio/)
+[SAS On Demand](https://welcome.oda.sas.com)
 
 ## Getting Started Checklist
 
