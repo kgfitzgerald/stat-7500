@@ -36,15 +36,13 @@ This website serves as the central hub for all files for the course as well as w
 
 ## Important Links
 
-[Syllabus](/stat-7500/assets/STAT 7500 Fitzgerald F25.pdf)
+[Syllabus](/stat-7500/assets/STAT 7500 Fitzgerald F25.pdf) 
 
 [Blackboard - home page](https://elearning.villanova.edu/ultra/courses/_183083_1/cl/outline)
 
 [Blackboard - submit assignments](https://elearning.villanova.edu/webapps/blackboard/content/listContent.jsp?course_id=_183083_1&content_id=_5567834_1)
 
 [Piazza](https://piazza.com/class/mdttdxk0ilg6e3](https://piazza.com/class/mdqaywninjt2q7/)
-
-[AI / LLM policy](/stat-7500/ai_policy/)
 
 [Extension request form](https://forms.office.com/r/0kB3JrmDy8)
 
