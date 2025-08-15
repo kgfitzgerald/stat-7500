@@ -15,9 +15,9 @@ Links to all lecture slides and in-class practice code will be provided below.
 
 ### Week 01
 
-+ [0 - Course Overview](lecture_slides/0_course_overview.pptx)
++ [0 - Course Overview](/assets/lecture_slides/0_course_overview.pptx)
 
-+ [SAS 1 - Intro to SAS](lecture_slides/SAS1_intro_to_sas.pptx)
++ [SAS 1 - Intro to SAS](/assets/lecture_slides/SAS1_intro_to_sas.pptx)
 
 
 
