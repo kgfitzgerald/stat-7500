@@ -24,7 +24,7 @@ seo:
 
 ### Course website
 
-This website serves as the central hub for all files for the course as well as weekly agendas & announcements. Use the navigation pane to view [in-class lecture slides & practice code](kgfitzgerald.github.io/stat-7500/lecture_slides/) and [Assignments](kgfitzgerald.github.io/stat-7500/assignments/).
+This website serves as the central hub for all files for the course as well as weekly agendas & announcements. Use the navigation pane to view [in-class lecture slides & practice code](lecture_slides/) and [Assignments](assignments/).
 
 ### Blackboard
 
@@ -36,13 +36,13 @@ This website serves as the central hub for all files for the course as well as w
 
 ## Important Links
 
-[Syllabus](stat-7500/assets/STAT 7500 Fitzgerald F25.pdf)
+[Syllabus](assets/STAT 7500 Fitzgerald F25.pdf)
 
 [Blackboard - home page](https://elearning.villanova.edu/ultra/courses/_183083_1/cl/outline)
 
 [Blackboard - submit assignments](https://elearning.villanova.edu/webapps/blackboard/content/listContent.jsp?course_id=_183083_1&content_id=_5567834_1)
 
-[Piazza](https://piazza.com/class/mdttdxk0ilg6e3](https://piazza.com/class/mdqaywninjt2q7/)
+[Piazza](https://piazza.com/class/mdqaywninjt2q7/)
 
 [Extension request form](https://forms.office.com/r/0kB3JrmDy8)
 
@@ -52,6 +52,6 @@ This website serves as the central hub for all files for the course as well as w
 
 + Fill out the Intro Survey (emailed to you by Dr. Fitz, the week before the semester)
 + Bookmark this course website in your browser [https://kgfitzgerald.github.io/stat-7500/](https://kgfitzgerald.github.io/stat-7500/)
-+ Read the [syllabus](/stat-7500/assets/STAT 7500 Fitzgerald F25.pdf)
++ Read the [syllabus](assets/STAT 7500 Fitzgerald F25.pdf)
 + Access [SAS On Demand for Academics](https://welcome.oda.sas.com/)
 + Turn on notifications for our [course Piazza page](https://piazza.com/villanova/fall2025/fall25_stat_7500_001/home)
