@@ -24,7 +24,7 @@ seo:
 
 ### Course website
 
-This website serves as the central hub for all files for the course as well as weekly agendas & announcements. Use the navigation pane to view [in-class lecture slides & practice code](lecture_slides/) and [Assignments](assignments/).
+This website serves as the central hub for all files for the course as well as weekly agendas & announcements. Use the navigation pane to view [in-class lecture slides & practice code](in_class/) and [Assignments](assignments/).
 
 ### Blackboard
 
