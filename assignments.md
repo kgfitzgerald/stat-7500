@@ -24,11 +24,9 @@ Most weeks, you will have 3 things to submit. See below for details and links to
 
 Instructions and/or data files for each homework are provided by the links below. You should submit your completed file(s) to the corresponding assignment on Blackboard.
 
-<!-- 
 
-+ [SAS HW 01](/assets/homework/SAS_HW_01.docx)
++ [SAS HW 01](/assets/homework/SAS_HW_01.pdf)
 
--->
 
 ## Reading annotations (due Wednesdays, 6:15pm)
 
