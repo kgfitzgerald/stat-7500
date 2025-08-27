@@ -32,7 +32,7 @@ This website serves as the central hub for all files for the course as well as w
 
 ### Piazza
 
-[Piazza](https://piazza.com/class/mdqaywninjt2q7/) will be our preferred platform for questions about homework, code, and general course questions. The system is integrated with Blackboard and is highly catered to getting you help quickly and efficiently from classmates and the instructor. Rather than emailing questions to the instructor, you should post your questions on Piazza. Email should be reserved for personal questions such as those regarding absences or grades. 
+Piazza will be our preferred platform for questions about homework, code, and general course questions. The system is integrated with Blackboard and is highly catered to getting you help quickly and efficiently from classmates and the instructor. Rather than emailing questions to the instructor, you should post your questions on Piazza. Email should be reserved for personal questions such as those regarding absences or grades. Piazza can be accessed via the home page on Blackboard. 
 
 ## Important Links
 
@@ -41,8 +41,6 @@ This website serves as the central hub for all files for the course as well as w
 [Blackboard - home page](https://elearning.villanova.edu/ultra/courses/_183083_1/cl/outline)
 
 [Blackboard - submit assignments](https://elearning.villanova.edu/webapps/blackboard/content/listContent.jsp?course_id=_183083_1&content_id=_5567834_1)
-
-[Piazza](https://piazza.com/class/mdqaywninjt2q7/)
 
 [Extension request form](https://forms.office.com/r/0kB3JrmDy8)
 
@@ -54,4 +52,4 @@ This website serves as the central hub for all files for the course as well as w
 + Bookmark this course website in your browser [https://kgfitzgerald.github.io/stat-7500/](https://kgfitzgerald.github.io/stat-7500/)
 + Read the [syllabus](assets/STAT 7500 Fitzgerald F25.pdf)
 + Access [SAS On Demand for Academics](https://welcome.oda.sas.com/)
-+ Turn on notifications for our [course Piazza page](https://piazza.com/villanova/fall2025/fall25_stat_7500_001/home)
++ Turn on notifications for our course Piazza page (accessed via Blackboard home page)
