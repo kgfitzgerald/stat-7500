@@ -15,7 +15,7 @@ Links to all lecture slides and in-class practice code will be provided below.
 
 ### Week 01
 
-+ [SLIDES: SAS 1 - Intro to SAS](/assets/lecture_slides/SAS1_Intro_to_SAS.pptx) 
++ [SLIDES: SAS 1 - Intro to SAS]({{ site.baseurl }}/assets/lecture_slides/SAS1_Intro_to_SAS.pptx)
 + [CODE: My First SAS Program F25](/assets/in_class_code/My First SAS Program F25.sas)
 
 
