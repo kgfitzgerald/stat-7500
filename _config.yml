@@ -22,6 +22,7 @@ url: 'https://kgfitzgerald.github.io' # the base hostname & protocol for your si
 exclude: ["Gemfile", "Gemfile.lock", "LICENSE"]
 include:
   - assets/lecture_slides
+  - files
 
 # Theme settings
 remote_theme: just-the-docs/just-the-docs@v0.10.1
