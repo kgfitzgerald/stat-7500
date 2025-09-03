@@ -26,6 +26,12 @@ Instructions and/or data files for each homework are provided by the links below
 
 
 + [SAS HW 01](/assets/homework/SAS_HW_01.pdf)
++ [SAS HW 02](/assets/homework/SAS_HW_02.pdf)
+  
+  + Data files for HW 02:
+      + [Patients Time 1](/assets/homework/Patients Time 1.txt)
+      + [Patients Gender](/assets/homework/Patients Gender.txt)
+      + [Babybnames](/assets/homework/Babynames.csv)
 
 
 ## Reading annotations (due Wednesdays, 6:15pm)
