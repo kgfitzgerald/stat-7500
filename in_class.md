@@ -18,6 +18,17 @@ Links to all lecture slides and in-class practice code will be provided below.
 + [SLIDES: SAS 1 – Intro to SAS]({{ site.baseurl }}/files/slides/SAS1_intro_to_SAS.pptx)
 + [CODE: My First SAS Program F25](/assets/in_class_code/My First SAS Program F25.sas)
 
+### Week 02
+
++ [SLIDES: SAS 2]({{ site.baseurl }}/files/slides/SAS2.pptx)
++ [CODE: Week 2 SAS](/assets/in_class_code/Week 2.sas)
++ [CODE: Labels & Formats](/assets/in_class_code/Labels and Formats.sas)
++ [DATA: club.xlsx](/assets/in_class_code/data/club.xlsx)
++ [DATA: club.csv](/assets/in_class_code/data/club.csv)
++ [DATA: club_tab.txt](/assets/in_class_code/data/club_tab.txt)
++ [DATA: club_space.txt](/assets/in_class_code/data/club_space.txt)
+
+
 
 
 
