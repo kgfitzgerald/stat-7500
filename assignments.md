@@ -37,7 +37,7 @@ Instructions and/or data files for each homework are provided by the links below
   
   + [New] Data files for HW 03:
       + [Patients Time 2](/assets/homework/Patients Time 2.txt)
-      + [Patients Gender](/assets/homework/Additional Patients.xlsx)
+      + [Additional Patients](/assets/homework/Additional Patients.xlsx)
 
 ## Reading annotations (due Wednesdays, 6:15pm)
 
