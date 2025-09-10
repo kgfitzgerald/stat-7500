@@ -32,7 +32,7 @@ Links to all lecture slides and in-class practice code will be provided below.
 
 + [SLIDES: SAS 3]({{ site.baseurl }}/files/slides/SAS3.pptx)
 + [CODE: Week 3 SAS](/assets/in_class_code/Week 3.sas)
-+ [DATA: NYCFlights2013.csv](/assets/in_class_code/data/NYCFlights2013.csv)
++ [DATA: NYCFlights2013.csv](/assets/in_class_code/data/NYCflights2013.csv)
 
 
 
