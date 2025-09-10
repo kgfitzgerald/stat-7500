@@ -28,6 +28,11 @@ Links to all lecture slides and in-class practice code will be provided below.
 + [DATA: club_tab.txt](/assets/in_class_code/data/club_tab.txt)
 + [DATA: club_space.txt](/assets/in_class_code/data/club_space.txt)
 
+## Week 03
+
++ [SLIDES: SAS 3]({{ site.baseurl }}/files/slides/SAS3.pptx)
++ [CODE: Week 3 SAS](/assets/in_class_code/Week 3.sas)
++ [DATA: NYCFlights2013.csv](/assets/in_class_code/data/NYCFlights2013.csv)
 
 
 
