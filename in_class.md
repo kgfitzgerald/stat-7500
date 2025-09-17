@@ -34,6 +34,9 @@ Links to all lecture slides and in-class practice code will be provided below.
 + [CODE: Week 3 SAS](/assets/in_class_code/Week 3.sas)
 + [DATA: NYCFlights2013.csv](/assets/in_class_code/data/NYCflights2013.csv)
 
+## Week 04
 
++ [SLIDES: SAS 4]({{ site.baseurl }}/files/slides/SAS4.pptx)
++ [DATA: Phillies_2025.xlsx](/assets/in_class_code/data/Phillies_2025.xlsx)
 
 

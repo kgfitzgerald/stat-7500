@@ -8,4 +8,17 @@ description: A feed containing solutions and miscellaneous resources
 
 # Solutions
 
+## In-class Practice Problems
+
 + [Week 02 Practice Problems](/assets/solutions/Week 2 SAS Practice Problems SOLUTIONS.sas)
+
++ [Week 03 Practice Problems](/assets/solutions/Week 3 Practice Problems SOLUTIONS.sas)
+
+
+## In-class slides w/ "quiz"" solutions
+
++ [Week 01 Slides]({{ site.baseurl }}/files/slides/SAS1_intro_to_SAS.pptx)
++ [Week 02 Slides]({{ site.baseurl }}/files/slides/SAS2.pptx)
++ [Week 03 Slides]({{ site.baseurl }}/files/slides/SAS3.pptx)
+
+
