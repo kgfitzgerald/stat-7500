@@ -44,7 +44,7 @@ Instructions and/or data files for each homework are provided by the links below
 + [SAS Mini Project](/assets/homework/SAS Mini-Project.pdf)
 
   + Data file for Mini-Project:
-      + [PA College Graduation by Zip Code.xlsx](/assets/homework/PA College Graduation by Zip Code.xlsx)
+      + [PA College Graduation by Zip Code](/assets/homework/pa_grad_zip_code.xlsx)
 
 ## Reading annotations (due Wednesdays, 6:15pm)
 
