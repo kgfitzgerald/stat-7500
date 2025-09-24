@@ -44,6 +44,8 @@ Piazza will be our preferred platform for questions about homework, code, and ge
 
 [SAS On Demand](https://welcome.oda.sas.com)
 
+[R & RStudio set-up](https://welcome.oda.sas.com)
+
 ## Getting Started Checklist
 
 + Fill out the Intro Survey (emailed to you by Dr. Fitz, the week before the semester)

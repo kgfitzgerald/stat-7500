@@ -9,15 +9,13 @@ nav_order: 4
 
 # Getting started with R & RStudio
 
-Each week, you will have small lab assignments that will be completed in RStudio, which uses the statistical programming language R. It is okay if you have never used R before, as each assignment will introduce new code by example. 
-
 To get fully set-up for using R & RStudio, there are 3 main steps:
 
 1. Download & Install R
 2. Download & Install RStudio
-3. Set up an R project for STAT 5700
+3. Set up an R project for STAT 7500
 
-The instructions below will walk you through each step. **You should do these BEFORE our 2nd class session in Week 1, since we will be diving into Lab 01 together in class.**
+The instructions below will walk you through each step. **You should do these BEFORE our class session in Week 6, since we will be diving into coding together in class.**
 
 ### Step 1: Download & Install R
 
@@ -35,13 +33,13 @@ Navigate to [https://posit.co/download/rstudio-desktop/](https://posit.co/downlo
 + Click on the download link corresponding to your computer's operating system
 + Open the download file and follow your computer's instructions for installing the software. For Mac users, begin the installation process by dragging the RStudio icon (right) into the Applications folder (left)
 
-![](/stat-5700/assets/images/rstudio.png)
+![](/stat-7500/assets/images/rstudio.png)
 
 + Once installed, make sure you can open RStudio on your computer.
 
-### Step 3 - Set up and R project for STAT 5700
+### Step 3 - Set up and R project for STAT 7500
 
-Follow the instructions in the video to set up at STAT_5700 R Project on your computer. *Note, the video references MATH_250, but you should create STAT_5700*
+Follow the instructions in the video to set up at STAT_7500 R Project on your computer. *Note, the video references MATH_250, but you should create STAT_7500*
 
 <video width="640" height="360" controls>
   <source src="{{ '/assets/images/Rproject.mp4' | relative_url }}" type="video/mp4">

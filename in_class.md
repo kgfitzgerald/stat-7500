@@ -39,4 +39,12 @@ Links to all lecture slides and in-class practice code will be provided below.
 + [SLIDES: SAS 4]({{ site.baseurl }}/files/slides/SAS4.pptx)
 + [DATA: Phillies_2025.xlsx](/assets/in_class_code/data/Phillies_2025.xlsx)
 
+## Week 05
+
++ [SLIDES: SAS 5]({{ site.baseurl }}/files/slides/SAS5.pptx)
++ [CODE: Week 5 SAS](/assets/in_class_code/Week 5.sas)
++ [DATA: philatemp.sas7bdat](/assets/in_class_code/data/philatemp.sas7bdat)
++ [DATA: HHSTUDY2.xlsx](/assets/in_class_code/data/HHSTUDY2.xlsx)
+
+
 
