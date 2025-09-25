@@ -45,6 +45,7 @@ Instructions and/or data files for each homework are provided by the links below
 
   + Data file for Mini-Project:
       + [PA College Graduation by Zip Code](/assets/homework/pa_grad_zip_code.xlsx)
+      + [Median Income by Zip Code](/assets/homework/income_zip_code.xlsx)
 
 ## Reading annotations (due Wednesdays, 6:15pm)
 
