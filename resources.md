@@ -14,6 +14,8 @@ description: A feed containing solutions and miscellaneous resources
 
 + [Week 03 Practice Problems](/assets/solutions/Week 3 Practice Problems SOLUTIONS.sas)
 
++ [Week 05 Practice Problems](/assets/solutions/Week 5 Practice Problems SOLUTIONS.sas)
+
 
 ## In-class slides w/ "quiz"" solutions
 
