@@ -1,0 +1,376 @@
+---
+title: "Welcome to MATH 250!"
+author: "Dr. Katie Fitzgerald"
+output:
+  xaringan::moon_reader:
+    css: ["xaringan-themer.css", "slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+    chalkboard: true
+---
+
+```{r child = "setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(rvest)
+```
+
+class: middle, center
+
+# MATH 250: Data Analysis <br> (aka Intro to Data Science)
+
+---
+
+## What is data science?
+
+- Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge.
+
+- Set of tools to help us be better **stewards of information**
+
+- We're going to learn to do this in a `tidy` way -- more on that later!
+
+<!-- - This is a course on introduction to data science, with an emphasis on statistical thinking. -->
+
+---
+
+## Course FAQ
+
+**Q - What data science background does this course assume?**
+<br>
+A - None. Pre-req: one stats class
+
+<br>
+--
+
+**Q - Is this a statistics course?**
+<br>
+A - While statistics $\neq$ data science, they are very closely related and have tremendous overlap. Hence, this course will help you utilize and further your statistical thinking. However this course is not your typical intro or mathematical statistics course.
+
+<br>
+--
+
+**Q - What computing language / software will we use?**
+<br>
+A - R
+---
+
+## Course learning objectives
+
+- Learn to explore, visualize, and analyze data in a *reproducible* and *shareable* manner
+
+--
+
+- Gain experience in data wrangling, exploratory data analysis, predictive modeling, applied statistical inference, and data visualization
+
+--
+
+- Work on problems and case studies inspired by and based on *real-world questions* and data
+
+--
+
+- Learn to effectively communicate results through written assignments and final project presentation
+
+---
+
+## Some of what you will learn
+
+.pull-left[
+- Fundamentals of `R`
+
+- Data visualization and wrangling with `ggplot2` and `dplyr` from the `tidyverse`
+
+- Data science workflow and scientific practice
+
+- Data communication / storytelling
+
+]
+
+.pull-right[
+
+- Data ethics
+
+- Reproducible reports with `Quarto`
+
+- Regression
+
+- Statistical inference
+]
+
+---
+
+## Examples of data science in practice
+
+- [FiveThirtyEight: How Restarting Student Loan Payments Could Change Millions of Lives — And The Economy ](https://projects.fivethirtyeight.com/redistricting-2022-maps/)
+
+- [The World Bank - ATLAS of Sustainable Development Goals](https://datatopics.worldbank.org/sdgatlas/goal-1-no-poverty)
+
+- [The Upshot: Top 10 Hardest and Easiest Spelling Bee Words, Aug. 19-25](https://www.nytimes.com/2023/08/26/upshot/spelling-bee-words.html)
+
+- [Tracking their life via Fitbit](https://livefreeordichotomize.com/posts/2017-12-27-a-year-in-fitbit.Rmd/)
+
+---
+
+class: middle, center
+
+# The Course
+
+---
+
+## Course Toolkit
+
+**Course Website:** [apumath250.netlify.app](apumath250.netlify.app)
+  - Central hub for the course!
+
+**Canvas**: Gradebook, Submit assignments, HELP Forum
+
+**RStudio:** Software -- more on this later!
+
+**GitHub repo:** Assignment templates -- more on this later!
+
+**Perusall:** Community Reading Annotations (Faith Integration)
+
+---
+
+## Activities: Prepare, Practice, Perform, Engage
+
+- **Prepare**: lecture videos + prep quizzes (due Tuesday class time)
+
+--
+
+- **Practice**: Application Exercises (AE) in class on Tuesdays (exit ticket)
+--
+
+- **Perform**: Put together what you've learned to analyze real-world data
+  -  Weekly lab assignments (Thursdays in class, due next Thursday class time)
+  -  Two exams - may have in-class and take-home portion
+  -  Final team project presented during the final exam period
+
+- **Engage**: with important issues in data ethics, and with the data science community itself
+  - Weekly community annotations (due Thursdays class time)
+  - 5 statistics experience points
+
+---
+
+## Statistics Experiences (Engage)
+
+- The world of statistics and data science is vast and dynamic! 
+--
+- The goal of the statistics experience assignments is to help you engage with the statistics and data science communities outside of the classroom. 
+--
+- Potential “Statistics Experiences”: 
+    - podcast
+    - reading a book
+    - getting coffee with a statistician / data scientist
+    - joining the American Statistical Association
+    - participating in #TidyTuesday. 
+--
+- Each experience is worth a varying number of points (see course website for details), and you are required to collect at least 5 “Statistics Experience points” throughout the semester. Up to 10 additional points can be collected and added to your lowest homework grade(s).
+
+---
+
+## Where to find help
+
+--
+
+- Attend (drop-in) Student Hours
+  - Mondays 4:15 - 5:30pm (Segerstrom 112 + Zoom)
+  - Tuesdays 2:30 - 4pm (APU Community Garden)
+  - Thursdays 10 - 11am (Segerstrom 112 + Zoom)
+
+--
+
+- Use **Canvas HELP Forum** for any questions about course content and/or assignments, since other students may benefit from the response. And it's easier to type code and math, compared to email.
+
+--
+
+- Use email for questions regarding personal matters and/or grades.
+
+---
+
+## Course community & Learning environment
+
+*What do you need [from me, from yourself, from your peers] for this semester to be successful?*
+
+--
+
+Traditional vs. flipped learning
+
+- Traditional classroom: first engagement with the material comes via a lecture in class, deeper engagement (e.g. homework) comes outside of class
+- Flipped learning: first engagement with the material comes in "individual space", and "group space" is used for deeper engagment with the material, when instructor is still there to guide
+
+--
+
+If you have participated in flipped learning before, what was your experience? In what ways did it require a shift in your approach to class/learning? 
+
+If you have NOT participated in flipped learning, what is your first impression of the idea? In what ways might it require a shift in your approach to class/learning?
+
+---
+
+<!-- ## Course community & Learning environment -->
+
+<!-- *What do you need [from me, from yourself, from your peers] for this semester to be successful?* -->
+
+<!-- - What makes group dynamics enriching? What hinders learning? -->
+
+<!-- - Collaborative norm-setting  -->
+
+
+<!-- --- -->
+
+## Class Norms
+
++ Everyone has expertise
++ Be present
++ Participate to the best of your ability
++ Share talk time
++ Critique ideas, not people
++ Engage new perspectives with curiosity, not judgement
++ Exhibit intellectual humility
++ Embrace discomfort & non-closure
++ Normalize time to think
++ Others??
+
+
+---
+
+class: middle, center
+
+# Let's dive in!
+
+---
+
+---
+
+background-image: url("img/unvotes/unvotes-01.jpeg")
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/unvotes/unvotes-02.jpeg")
+```
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/unvotes/unvotes-03.jpeg")
+```
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/unvotes/unvotes-04.jpeg")
+```
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/unvotes/unvotes-05.jpeg")
+```
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/unvotes/unvotes-06.jpeg")
+```
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/unvotes/unvotes-07.jpeg")
+```
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="90%"}
+knitr::include_graphics("img/unvotes/unvotes-08.jpeg")
+```
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="90%"}
+knitr::include_graphics("img/unvotes/unvotes-09.jpeg")
+```
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="90%"}
+knitr::include_graphics("img/unvotes/unvotes-10.jpeg")
+```
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="90%"}
+knitr::include_graphics("img/unvotes/unvotes-11.jpeg")
+```
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="90%"}
+knitr::include_graphics("img/unvotes/unvotes-12.jpeg")
+```
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/unvotes/unvotes-13.jpeg")
+```
+
+---
+
+class: inverse
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/unvotes/unvotes-14.jpeg")
+```
+
+---
+
+# Your turn!
+
+- Complete 5 steps on Canvas page "R & RStudio Getting Started"
+
+- Application Exercise (AE) 01a 
+
+
+### For Thursday
+
+- Complete AE 01 
+- Watch "Meet the Toolkit" lecture + complete prep quiz on Canvas
+
+
+### For Saturday (this week only)
+
+- Complete Community Annotations (3+ thoughtful comments)
+
+
+
