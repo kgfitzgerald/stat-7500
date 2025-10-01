@@ -514,10 +514,12 @@ knitr::include_graphics("img/unvotes/unvotes-14.jpeg")
 
 ---
 
-# Your turn!
+# Let's edit!
 
-- Application Exercise (AE) 01a 
+- UN Votes.qmd
 
+---
 
+# Your turn! R HW 01
 
 

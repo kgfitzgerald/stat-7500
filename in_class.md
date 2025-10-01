@@ -46,5 +46,7 @@ Links to all lecture slides and in-class practice code will be provided below.
 + [DATA: philatemp.sas7bdat](/assets/in_class_code/data/philatemp.sas7bdat)
 + [DATA: HHSTUDY2.xlsx](/assets/in_class_code/data/HHSTUDY2.xlsx)
 
+## Week 06
 
-
++ [SLIDES: R 01 - Intro](/assets/R_slides/01-intro.html)
++ {% include download.html path="assets/in_class_code/week_06_un_votes.qmd" %}
