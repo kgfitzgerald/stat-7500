@@ -44,7 +44,7 @@ Piazza will be our preferred platform for questions about homework, code, and ge
 
 [SAS On Demand](https://welcome.oda.sas.com)
 
-[R & RStudio set-up](https://welcome.oda.sas.com)
+[R & RStudio set-up](https://kgfitzgerald.github.io/stat-7500/rstudio)
 
 ## Getting Started Checklist
 
