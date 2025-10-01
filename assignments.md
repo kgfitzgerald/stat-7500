@@ -47,8 +47,9 @@ Instructions and/or data files for each homework are provided by the links below
       + [PA College Graduation by Zip Code](/assets/homework/pa_grad_zip_code.xlsx)
       + [Median Income by Zip Code](/assets/homework/income_zip_code.xlsx)
 
-+ [R HW 01 instructions](/assets/homework/R_HW_instructions/lab-01-hello-r.html)
-{% include download.html path="assets/R_HW_templates/R_HW_01.qmd" %}
++ R HW 01
+  + [Instructions](/assets/homework/R_HW_instructions/lab-01-hello-r.html)
+  + {% include download.html path="assets/R_HW_templates/R_HW_01.qmd" %}
 
 ## Reading annotations (due Wednesdays, 6:15pm)
 
