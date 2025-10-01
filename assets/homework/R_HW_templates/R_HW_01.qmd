@@ -10,8 +10,6 @@ format:
     number_section: false
     highlight: "tango"
     theme: "cosmo"
-    fig-width: 3
-    fig-height: 3
 editor: visual
 editor_options: 
   chunk_output_type: console
