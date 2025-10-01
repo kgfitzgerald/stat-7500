@@ -49,4 +49,5 @@ Links to all lecture slides and in-class practice code will be provided below.
 ## Week 06
 
 + [SLIDES: R 01 - Intro](/assets/R_slides/01-intro.html)
++ [install_packages.R](/assets/in_class_code/install_packages.R)
 + {% include download.html path="assets/in_class_code/week_06_un_votes.qmd" %}
