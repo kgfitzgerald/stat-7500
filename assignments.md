@@ -47,6 +47,9 @@ Instructions and/or data files for each homework are provided by the links below
       + [PA College Graduation by Zip Code](/assets/homework/pa_grad_zip_code.xlsx)
       + [Median Income by Zip Code](/assets/homework/income_zip_code.xlsx)
 
++ [R HW 01 instructions](/assets/homework/R_HW_instructions/lab-01-hello-r.html)
++ [R HW 01 .qmd template](/assets/homework/R_HW_templates/R_HW_01.qmd)
+
 ## Reading annotations (due Wednesdays, 6:15pm)
 
 Most weeks you will be assigned an article, book chapter, and/or video about applications of statistics & data science and/or ethical issues in the field. Rather than a traditional discussion board, we will use Perusall, a community annotation tool, where you can engage with the text by highlighting, commenting, asking questions, and responding to your peers' comments/questions, all on a shared document. You can access these assignments [here](https://elearning.villanova.edu/webapps/blackboard/content/listContentEditable.jsp?content_id=_5567838_1&course_id=_183083_1), or by navigating on the Blackboard home page to Perusall - Reading Annotations. 

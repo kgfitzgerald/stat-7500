@@ -1,8 +1,0 @@
-install.packages("tidyverse")
-install.packages("gtools")
-install.packages("ggdist")
-install.packages("distributional")
-install.packages("dslabs")
-install.packages("infer")
-install.packages("ggplot2movies")
-install.packages("cowplot")
