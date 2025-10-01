@@ -49,7 +49,7 @@ Instructions and/or data files for each homework are provided by the links below
 
 + R HW 01
   + [Instructions](/assets/homework/R_HW_instructions/lab-01-hello-r.html)
-  + {% include download.html path="assets/R_HW_templates/R_HW_01.qmd" %}
+  + {% include download.html path="assets/homework/R_HW_templates/R_HW_01.qmd" %}
 
 ## Reading annotations (due Wednesdays, 6:15pm)
 

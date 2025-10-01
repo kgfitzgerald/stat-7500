@@ -21,24 +21,22 @@ install.packages("devtools")
 devtools::install_github("hadley/emo")
 ```
 
-
 # Goals
 
 The main goal of this assignment is to introduce you to R and RStudio, which we will be using throughout the course both to learn the statistical concepts discussed in the course and to analyze real data and come to informed conclusions.
 
 You will...
 
-+ Access help documentation with `?`
-+ Create scatterplots
-+ Calculate correlation coefficients
-+ Tweak the YAML 
+-   Access help documentation with `?`
+-   Create scatterplots
+-   Calculate correlation coefficients
+-   Tweak the YAML
 
 As the labs progress, you are encouraged to explore beyond what the labs dictate; a willingness to experiment will make you a much better programmer.
 Before we get to that stage, however, you need to build some basic fluency in R.
 Today we begin with the fundamental building blocks of R and RStudio: the interface, reading in data, and basic commands.
 
 For this assignment, you will collaborate in your (randomly assigned) groups (see Blackboard), but you will each submit your own assignment.
-You may share code with your group via Blackboard Group Messages (general FYI - instructors can see these messages!).
 
 # Getting Started - RStudio
 
@@ -179,7 +177,7 @@ dino_data |>
 Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
 ```
 
-5.  Finally, let's plot all datasets at once and calculate the correlation coefficient for each (code below). Comment on your findings - articulate why this is a cautionary tale about the correlation coefficient! (Google "correlation coefficient" if you're unsure what it measures). 
+5.  Finally, let's plot all datasets at once and calculate the correlation coefficient for each (code below). Comment on your findings - articulate why this is a cautionary tale about the correlation coefficient! (Google "correlation coefficient" if you're unsure what it measures).
 
 In order to plot all 12 datasets we will make use of faceting.
 
@@ -200,8 +198,6 @@ datasaurus_dozen |>
 
 You're done with the data analysis exercises, but I'd like you to do two more things:
 
-
-
 -   **Resize your figures:**
 
 In the YAML under the `html:` settings, add `fig-width: 3` and `fig-height: 3` This will make each plot 3 inches by 3 inches.
@@ -211,18 +207,17 @@ knitr::include_graphics("img/fig-resize-global.png")
 ```
 
 You can also use different figure sizes for different figures.
-To do so, add `#| fig-width: ` and `#| fig-height: ` as two new lines to the top of the code chunk for the figure you want to change. For example, change the figure in Exercise 5 to be 15 x 9.
-
+To do so, add `#| fig-width:` and `#| fig-height:` as two new lines to the top of the code chunk for the figure you want to change.
+For example, change the figure in Exercise 5 to be 15 x 9.
 
 ```{r fig-resize-local, echo = FALSE, fig.width=3}
 knitr::include_graphics("img/fig-resize-local.png")
 ```
 
-
-
 -   **Change the look of your report:**
 
-In the YAML, this assignment is currently set to have `theme: "cosmo"`. See a list of all available themes below and on the [Quarto website](https://quarto.org/docs/output-formats/html-themes.html).
+In the YAML, this assignment is currently set to have `theme: "cosmo"`.
+See a list of all available themes below and on the [Quarto website](https://quarto.org/docs/output-formats/html-themes.html).
 Play around with these until you're happy with the look.
 
 ```{r theme-highlight, fig.margin = FALSE, echo = FALSE, fig.width=3}
@@ -233,20 +228,26 @@ knitr::include_graphics("img/theme.png")
 knitr::include_graphics("img/view-html.png")
 ```
 
+-   **Change font formatting:**
+
+Play around with the format of some of the font in your report.
+Try to make some of it bold, italics, etc.
+You can do this "point and click" in the "Visual" view of your .qmd, but if you switch to the "Source" view you can see what underlying syntax makes things bold, section headers, etc. 
+
 `r emo::ji("right_arrow")` ✅ ⬆️ *Yay, you're done! Render one last time to make sure everything appears as intended in your html, then proceed to the steps below for how to submit your assignment*
 
 # Submit
 
-Unfortunately Blackboard does not like .html files, so you'll need to export / "print" your html file as a pdf. You will submit a pdf file to the R HW 01 assignment on Blackboard. 
+Unfortunately Blackboard does not like .html files, so you'll need to export / "print" your html file as a pdf.
+You will submit a pdf file to the R HW 01 assignment on Blackboard.
 
 Follow these steps:
 
-+ Open your .html file in a web browser by clicking on the file name in the Files quadrant, and select "View in Web Browser".
-+ In your web browser menu (e.g., Safari, Chrome, Edge, Firefox), go to File > Export as PDF (on Mac) or File > Print (on Mac or Windows).
-+ If you don’t see an export option, choose Print and in the print dialog select Save as PDF (on Mac) or Microsoft Print to PDF (on Windows).
-+ Save your file as R_HW_01.pdf.
-+ Submit your PDF to the R HW 01 assignment in Blackboard.
-
+-   Open your .html file in a web browser by clicking on the file name in the Files quadrant, and select "View in Web Browser".
+-   In your web browser menu (e.g., Safari, Chrome, Edge, Firefox), go to File \> Export as PDF (on Mac) or File \> Print (on Mac or Windows).
+-   If you don’t see an export option, choose Print and in the print dialog select Save as PDF (on Mac) or Microsoft Print to PDF (on Windows).
+-   Save your file as R_HW_01.pdf.
+-   Submit your PDF to the R HW 01 assignment in Blackboard.
 
 # Grading (10 pts)
 
@@ -259,9 +260,8 @@ Follow these steps:
 | Ex 3                  | 2      |
 | Ex 4                  | 2      |
 | Ex 5                  | 2      |
-| Reflection prompts    | 1     |
-| Workflow & formatting | 1     |
-
+| Reflection prompts    | 1      |
+| Workflow & formatting | 1      |
 
 **Grading notes**:
 
