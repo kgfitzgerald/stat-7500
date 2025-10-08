@@ -1,5 +1,5 @@
 ---
-title: "Lab 02: Data Visualization"
+title: "R HW 02: Data Visualization"
 author: "YOUR NAME HERE"
 date: "`r Sys.Date()`"
 format: 
