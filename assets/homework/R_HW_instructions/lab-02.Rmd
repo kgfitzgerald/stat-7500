@@ -1,6 +1,5 @@
 ---
-title: "Lab 02: Data Visualization"
-subtitle: "due Thursday, September 12 at 4:20pm"
+title: "R HW 02: Data Visualization"
 output: 
   tufte::tufte_html:
     css: "lab.css"
@@ -129,7 +128,7 @@ Before submitting your assignment on Blackboard, Render one last time, then open
 
 To submit, export your html as a .pdf and upload the pdf document to the relevant assignment on Blackboard. Refer back to Lab 01 for detailed instructions on how to submit your assignment. 
 
-# Grading (50 pts)
+# Grading (10 pts)
 
 <br>
 
