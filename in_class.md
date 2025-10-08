@@ -51,3 +51,9 @@ Links to all lecture slides and in-class practice code will be provided below.
 + [SLIDES: R 01 - Intro](/assets/R_slides/01-intro.html)
 + [install_packages.R](/assets/in_class_code/install_packages.R)
 + {% include download.html path="assets/in_class_code/week_06_un_votes.qmd" %}
+
+## Week 07
+
++ [SLIDES: R 02 - Data Basics & Data Visualization](/assets/R_slides/02-data-viz.html)
++ {% include download.html path="assets/in_class_code/week_07_data_viz.qmd" %}
++ [BONUS image file](/assets/in_class_code/images/bonus.png)
