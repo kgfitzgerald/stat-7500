@@ -54,6 +54,7 @@ Instructions and/or data files for each homework are provided by the links below
 + R HW 02
   + [Instructions](/assets/homework/R_HW_instructions/lab-02.html)
   + {% include download.html path="assets/homework/R_HW_templates/R_HW_02.qmd" %}
+  + [Data: 2020 American National Election Study](/assets/homework/anes202_subset.csv)
 
 ## Reading annotations (due Wednesdays, 6:15pm)
 
