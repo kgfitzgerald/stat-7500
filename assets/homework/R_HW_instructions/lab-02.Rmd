@@ -23,8 +23,9 @@ In this lab, you will...
 
 ## Getting started 
 
--   Download R_HW_02.qmd from our course website (under Assignments)
+-   Download R_HW_02.qmd and anes_2020_subset.csv from our course website (under Assignments)
 -   Place the downloaded .qmd document in your STAT_7500 folder on your computer
+-   Place the .csv file inside a subfolder called 'data' inside the STAT_7500 folder
 -   From inside your STAT_7500 RStudio Project, open and render the Quarto document
 
 # Packages
@@ -39,7 +40,7 @@ library(ggridges)
 
 # Data: 2020 American National Election Study
 
-The data for this homework assignment comes from the [2020 American National Election Study](https://electionstudies.org/data-center/2020-time-series-study/).
+The data for this homework assignment comes from the [2020 American National Election Study](https://electionstudies.org/data-center/2020-time-series-study/). Note, you will need the .csv file to be located inside a subfolder called data for this code to work properly. 
 
 ```{r, eval = FALSE}
 anes <- read_csv("data/anes2020_subset.csv")
