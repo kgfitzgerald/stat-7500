@@ -55,6 +55,11 @@ Instructions and/or data files for each homework are provided by the links below
   + [Instructions](/assets/homework/R_HW_instructions/lab-02.html)
   + {% include download.html path="assets/homework/R_HW_templates/R_HW_02.qmd" %}
   + [Data: 2020 American National Election Study](/assets/homework/anes2020_subset.csv)
+  
++ R HW 03
+  + [Instructions](/assets/homework/R_HW_instructions/lab-03.html)
+  + {% include download.html path="assets/homework/R_HW_templates/R_HW_03.qmd" %}
+  + [Data: North Carolina Counties](/assets/homework/nc-county.csv)
 
 ## Reading annotations (due Wednesdays, 6:15pm)
 
