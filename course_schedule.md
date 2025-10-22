@@ -26,15 +26,15 @@ table td:last-child {
 | 6    | Oct 1      | Intro to R and Quarto                                                                        | SAS Mini Project<br>Week 06 check-in                              |
 | 7    | Oct 8      | Working with Data<br>Data Viz I                                                              | R HW 01<br>Annotations 05<br>Week 07 check-in                     |
 | —    | Oct 15     | **FALL BREAK**                                                                               |                                                                   |
-| 8    | Oct 22     | Data Viz II                                                                                  | R HW 02<br>Annotations 06<br>Week 08 check-in                     |
-| 9    | Oct 29     | Data Viz III<br>Data Wrangling – Isolating                                                    | R HW 03<br>Annotations 07<br>Week 09 check-in<br>Hand out RDV Mini Project |
-| 10   | Nov 5      | Data Wrangling – Piping<br>Data Wrangling – Deriving                                          | R HW 04<br>Annotations 08<br>Week 10 check-in                     |
-| 11   | Nov 12     | Data Wrangling – Combining                                                                    | R Data Viz Mini Project<br>Week 11 check-in                       |
-| 12   | Nov 19     | Data Wrangling – Tidy Data<br>Data Wrangling – Scraping                                       | R HW 05<br>Annotations 09<br>Week 12 check-in<br>Hand out RDW Mini Project |
+| 8    | Oct 22     | Data Wrangling I                                                                                  | R HW 02<br>Annotations 06<br>Week 08 check-in                     |
+| 9    | Oct 29     | Data Wrangling II                                                   | R HW 03<br>Annotations 07<br>Week 09 check-in|
+| 10   | Nov 5      | Data Importing & Cleaning                                         | R HW 04<br>Annotations 08<br>Week 10 check-in <br>Hand out R Mini Project 1 |                    |
+| 11   | Nov 12     | Scraping                                                                   | R HW 05 <br>Week 11 check-in                       |
+| 12   | Nov 19     | More Data Viz                                       | R Mini Project 1 <br>Annotations 09<br>Week 12 check-in<br>Hand out R Mini Project 2|
 | 13   | Nov 26     | **THANKSGIVING – NO CLASS**                                                                   |                                                                   |
 | 14   | Dec 3      | Working with Text<br>Bootstrapping and Simulation                                             | R HW 06<br>Annotations 10<br>Week 14 check-in                     |
 | 15   | Dec 10     | Additional Topics<br>Parting Thoughts                                                         | End of Course Reflection                                          |
-| —    | Dec 17     | **NO CLASS**                                                                                  | RDW Mini Project                                                  |
+| —    | Dec 17     | **NO CLASS**                                                                                  | R Mini Project 2                                                  |
 
 
 
