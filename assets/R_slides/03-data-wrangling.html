@@ -1128,6 +1128,24 @@ hotels |&gt;
 
 ---
 
+# Quiz
+
+What rows remain? 
+
+
+``` r
+df &lt;- data.frame(student = c("A","B","C","D"),
+             score = c(90, 80, 85, 95))
+df |&gt;  filter(score &gt; 85)
+```
+
+    A. Students A and D
+    B. Students B and C
+    C. Students A, C, and D
+    D. All students
+
+---
+
 ## `filter` for many conditions at once
 
 
@@ -1736,6 +1754,41 @@ hotels |&gt;
 ##     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
 ## 1   -6.38     102.       94.6    5400
 ```
+
+---
+
+# Quiz
+
+What does this code return?
+
+
+``` r
+df |&gt; 
+  summarise(mean_score = mean(score))
+```
+
+    A. A 1x1 data frame with one value: the mean of all scores
+    B. A new column with each student’s mean score
+    C. An error: `summarise()` needs `group_by()`
+    D. The same dataset as before
+
+---
+
+# Quiz 
+
+What's the result of this pipeline?
+
+
+``` r
+df %&gt;%
+  mutate(passed = score &gt; 85) %&gt;%
+  filter(passed)
+```
+
+    A. Keeps only students with score &gt; 85
+    B. Creates a new column passed with TRUE/FALSE for all students
+    C. Both A and B
+    D. Neither
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

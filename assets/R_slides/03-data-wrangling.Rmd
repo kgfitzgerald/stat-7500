@@ -730,6 +730,23 @@ hotels |>
 
 ---
 
+# Quiz
+
+What rows remain? 
+
+```{r, eval = FALSE}
+df <- data.frame(student = c("A","B","C","D"),
+             score = c(90, 80, 85, 95))
+df |>  filter(score > 85)
+```
+
+    A. Students A and D
+    B. Students B and C
+    C. Students A, C, and D
+    D. All students
+
+---
+
 ## `filter` for many conditions at once
 
 ```{r}
@@ -1036,3 +1053,36 @@ hotels |>
     max_adr = max(adr)
     )
 ```
+
+---
+
+# Quiz
+
+What does this code return?
+
+```{r, eval = FALSE}
+df |> 
+  summarise(mean_score = mean(score))
+```
+
+    A. A 1x1 data frame with one value: the mean of all scores
+    B. A new column with each student’s mean score
+    C. An error: `summarise()` needs `group_by()`
+    D. The same dataset as before
+
+---
+
+# Quiz 
+
+What's the result of this pipeline?
+
+```{r, eval = FALSE}
+df %>%
+  mutate(passed = score > 85) %>%
+  filter(passed)
+```
+
+    A. Keeps only students with score > 85
+    B. Creates a new column passed with TRUE/FALSE for all students
+    C. Both A and B
+    D. Neither
