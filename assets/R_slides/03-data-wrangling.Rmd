@@ -679,6 +679,39 @@ hotels |>
 
 ---
 
+# Quiz
+
+How many rows and columns do you expect the following code to produce? `starwars` has 87 rows and 14 columns to begin with (87 x 14).
+
+```{r, eval = FALSE}
+starwars |> 
+  select(name, homeworld, species)
+```
+
+
+    a. 87 x 14
+    b. 3 x 14
+    c. 87 x 3
+    d. 14 x 3
+
+---
+
+# Quiz
+
+How many rows and columns do you expect the following code to produce? `starwars` has 87 rows and 14 columns to begin with.
+
+```{r, eval = FALSE}
+starwars |> 
+  slice(1:10)
+```
+
+    a. 87 x 10
+    b. 10 x 14
+    c. 14 x 10
+    d. 10  x 87
+
+---
+
 class: middle
 
 # `filter`

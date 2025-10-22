@@ -62,3 +62,9 @@ Links to all lecture slides and in-class practice code will be provided below.
 
 + [SLIDES: R 03 - Data Wrangling I](/assets/R_slides/03-data-wrangling.html)
 + {% include download.html path="assets/in_class_code/week_08.qmd" %}
+
+## Week 09
+
++ [SLIDES: R 04 - Data Wrangling II](/assets/R_slides/04-data-wrangling-2.html)
++ {% include download.html path="assets/in_class_code/week_09.qmd" %}
++ [Flight map image file](/assets/in_class_code/images/flights_map.png)
