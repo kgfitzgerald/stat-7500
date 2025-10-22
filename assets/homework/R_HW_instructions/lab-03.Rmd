@@ -287,7 +287,7 @@ Before submitting your assignment on Blackboard, Render one last time, then open
 
 + Check for overall neatness & organization of the report (e.g. headers, subheaders, use of bullets, font changes)
 
-To submit, export your html as a .pdf and upload the pdf document to the relevant assignment on Blackboard. Refer back to Lab 01 for detailed instructions on how to submit your assignment. 
+To submit, export your html as a .pdf and upload the pdf document to the relevant assignment on Blackboard. Refer back to R HW 01 for detailed instructions on how to submit your assignment. 
 
 # Grading (10 pts)
 
