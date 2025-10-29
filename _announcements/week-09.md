@@ -6,8 +6,8 @@ date: 2025-10-29
 
 Due today (6:15pm)
 
-+ R HW 03 
-+ Annotations 07
++ R HW 03 (Counties in NC & Midwest)
++ Annotations 07 (Data privacy - OKCupid, Cambridge Analytica, Hacked data)
 
 Due NEXT Wednesday
 
