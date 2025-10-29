@@ -60,6 +60,10 @@ Instructions and/or data files for each homework are provided by the links below
   + [Instructions](/assets/homework/R_HW_instructions/lab-03.html)
   + {% include download.html path="assets/homework/R_HW_templates/R_HW_03.qmd" %}
   + [Data: North Carolina Counties](/assets/homework/nc-county.csv)
+  
++ R HW 04
+  + [Instructions](/assets/homework/R_HW_instructions/lab-04.html)
+  + {% include download.html path="assets/homework/R_HW_templates/R_HW_04.qmd" %}
 
 ## Reading annotations (due Wednesdays, 6:15pm)
 
