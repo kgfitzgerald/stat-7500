@@ -36,7 +36,154 @@ Today you will practice:
 + joining multiple data frames
 + pivoting data frames to wide or long format
 + planning a data wrangling pipeline to accomplished a desired task/visualization
-+ identifying when Simpson's paradox might be at play
+
+
+---
+
+# A quick refresh of `dplyr` verbs in R
+
+Which of the following allows you to keep rows that meet a certain criteria?
+
+  A. `keep()`
+  
+  B. `where()`
+  
+  C. `filter()`
+  
+  D. `select()`
+  
+  E. `mutate()`
+
+---
+
+# A quick refresh of `dplyr` verbs in R
+
+Which of the following allows you to keep specified columns?
+
+  A. `keep()`
+  
+  B. `colname()`
+  
+  C. `filter()`
+  
+  D. `select()`
+  
+  E. `mutate()`
+
+---
+
+# A quick refresh of `dplyr` verbs in R
+
+Recall the `midwest` dataset you used for homework (dimensions: 437 x 2), where each row is a `county`, and there is data on counties from 5 Midwestern states.
+
+How many rows and columns will the following code produce?
+
+```{r, eval = FALSE}
+midwest |> count(state)
+```
+
+A. 437 x 3
+
+B. 5 x 2
+
+C. 1 x 1
+
+D. 5 x 28
+
+
+---
+
+# Still thinking about the `midwest` data...
+
+You want to calculate the average percentage of college-educated adults (percollege) by state.
+Which verbs do you need?
+
+A. `filter()` and mutate()
+
+B. `group_by()` and `summarize()`
+
+C. `mutate()` and `arrange()`
+
+D. `count()` and `summarize()`
+
+---
+
+# Still thinking about the `midwest` data...
+
+You want to keep only counties where less than 10% of the population lives in poverty `(percbelowpoverty)` .
+Which verb do you use?
+
+A. `mutate()`
+
+B. `filter()` 
+
+C. `group_by()`
+
+D. `summarize()`
+
+---
+
+# Still thinking about the `midwest` data...
+
+You want to create a new variable for the proportion of children in the population, using
+`perc_child = popchild / poptotal`.
+ Which verb should you use?
+
+A. `summarize()`
+
+B. `filter()`
+
+C. `mutate()` 
+
+D. `count()`
+
+---
+
+# Still thinking about the `midwest` data...
+
+How many rows will the resulting dataset have?
+```{r, eval = FALSE}
+midwest |> 
+  group_by(state) |> 
+  mutate(mean_poverty = mean(percbelowpoverty))
+```
+
+A. One per state
+
+B. One per value of `percbelowpoverty`
+
+C. Same number as the original dataset
+
+D. Depends on missing values
+
+---
+
+# Still thinking about the `midwest` data...
+
+You want to find out which state has the highest average percentage of people in poverty. Which pipeline would give you that result?
+
+```{r, eval = FALSE}
+#A
+midwest |> summarize(max(perpoverty))
+
+#B
+midwest |> 
+      group_by(state) |> 
+      summarize(avg_pov = mean(percbelowpoverty)) |> 
+      arrange(desc(avg_pov))
+
+#C
+midwest |> mutate(avg_pov = mean(percbelowpoverty)) |> max()
+
+#D 
+midwest |> count(percbelowpoverty) |> arrange()
+```
+
+---
+
+class: middle
+
+# Data Wrangling: Joining multiple datasets
 
 ---
 
@@ -58,7 +205,7 @@ works <- read_csv("data/scientists/works.csv")
 
 ## Data: Women in science 
 
-Information on 10 women in science who changed the world
+Information on "10 women in science who changed the world"
 
 .small[
 ```{r echo=FALSE}
@@ -104,7 +251,7 @@ works
 ```{r echo=FALSE}
 professions |>
   left_join(dates) |>
-  left_join(works)
+  left_join(works) #|> write_csv("data/scientists/all_scientists.csv")
 ```
 
 ---
@@ -138,16 +285,33 @@ class: middle
 
 ```{r eval=FALSE}
 something_join(x, y)
+
+x |> 
+  something_join(y)
 ```
 
-- `left_join()`: all rows from x
-- `right_join()`: all rows from y
-- `full_join()`: all rows from both x and y
-- `semi_join()`: all rows from x where there are matching values in y, keeping just columns from x
-- `inner_join()`: all rows from x where there are matching values in y, return 
-all combination of multiple matches in the case of multiple matches
-- `anti_join()`: return all rows from x where there are not matching values in y, never duplicate rows of x
-- ...
+#### Mutating joins (add variables in)
+
+- `left_join()`: keeps all rows in x
+- `right_join()`: keeps all rows in y
+- `full_join()`: keeps all rows in x or y
+- `inner_join()`: only keeps rows from x that have a matching key in y
+
+---
+
+## Joining data frames
+
+```{r eval=FALSE}
+something_join(x, y)
+
+x |> 
+  something_join(y)
+```
+
+#### Filtering joins (remove rows based on matches, don't bring in new variables)
+- `semi_join()`: only keeps rows from x that have a match in y; does not bring in y's columns
+- `anti_join()`: only keeps rows from x that do NOT have a match in y; does not bring in y's columns
+
  
 ---
 
@@ -197,7 +361,16 @@ left_join(x, y)
 
 ## `left_join()`
 
-```{r}
+What do you expect? How many rows and columns?
+
+```{r, eval = FALSE}
+professions |>
+  left_join(dates) #<<
+```
+
+--
+
+```{r, echo = FALSE}
 professions |>
   left_join(dates) #<<
 ```
@@ -221,8 +394,16 @@ right_join(x, y)
 
 ## `right_join()`
 
+What do you expect? How many rows and columns?
 
-```{r}
+```{r, eval = FALSE}
+professions |>
+  right_join(dates) #<<
+```
+
+--
+
+```{r, echo = FALSE}
 professions |>
   right_join(dates) #<<
 ```
@@ -294,7 +475,16 @@ semi_join(x, y)
 
 ## `semi_join()`
 
-```{r}
+What do you expect? How many rows and columns?
+
+```{r, eval = FALSE}
+dates |>
+  semi_join(works) #<<
+```
+
+--
+
+```{r, echo = FALSE}
 dates |>
   semi_join(works) #<<
 ```
@@ -345,7 +535,7 @@ class: middle
 
 - Have:
   - Enrolment: official university enrolment records
-  - Survey: Student provided info missing students who never filled it out and including students who filled it out but dropped the class
+  - Survey: Student provided info; missing students who never filled it out and including students who filled it out but dropped the class
 - Want: Survey info for all enrolled in class 
 
 --
@@ -365,6 +555,48 @@ enrolment
 survey
 ```
 ]
+
+---
+
+# Quiz
+
+Which code is guaranteed to retain rows for all students enrolled in the course, but not students who dropped (i.e. are not currently enrolled)?
+
+A. `enrolment |> left_join(survey, by = "id")`
+
+B. `enrolment |> inner_join(survey, by = "id")`
+
+C. `enrolment |> semi_join(survey, by = "id")`
+
+D. `enrolment |> full_join(survey, by = "id")`
+
+---
+
+# Quiz
+
+Which code will return rows for students who did not fill out the survey?
+
+A. `enrolment |> semi_join(survey, by = "id")`
+
+B. `enrolment |> anti_join(survey, by = "id")`
+
+C. `survey |> semi_join(enrolment, by = "id")`
+
+D. `survey |> anti_join(enrolment, by = "id")`
+
+---
+
+# Quiz
+
+Which code will return rows for students who filled out the survey but dropped the course?
+
+A. `enrolment |> semi_join(survey, by = "id")`
+
+B. `enrolment |> anti_join(survey, by = "id")`
+
+C. `survey |> semi_join(enrolment, by = "id")`
+
+D. `survey |> anti_join(enrolment, by = "id")`
 
 ---
 
@@ -399,6 +631,14 @@ survey |>
 
 # Your turn: week_09.qmd
 
+Recall: `flights` contains data about every flight that departed La Guardia, JFK, or Newark airports in 2013
+
+```{r fig-nycflights13, echo=FALSE, out.width='60%'}
+knitr::include_graphics("img/nycflights13.png")
+
+```
+
+
 Exercises 1 - 5
 
 ---
@@ -415,6 +655,7 @@ In groups, brainstorm the data wrangling required to create this visualizaton.
 ]
 
 .pull-right[
+
 ![](img/flights_map.png)
 ]
 
@@ -745,21 +986,66 @@ Source: [FiveThirtyEight](https://projects.fivethirtyeight.com/trump-approval-ra
 
 ---
 
-## Data
+## Goal
 
 ```{r include=FALSE}
 trump <- read_csv("data/trump/trump.csv")
 ```
 
+Write psuedocode required to create this visualization
+
+```{r echo=FALSE, out.width="80%"}
+trump |>
+  pivot_longer(
+    cols = c(approval, disapproval),
+    names_to = "rating_type",
+    values_to = "rating_value"
+  ) |>
+  ggplot(aes(x = date, y = rating_value, 
+             color = rating_type, group = rating_type)) +
+  geom_line() +
+  facet_wrap(~ subgroup) +
+  scale_color_manual(values = c("darkgreen", "orange")) + 
+  labs( 
+    x = "Date", y = "Rating", 
+    color = NULL, 
+    title = "How (un)popular is Donald Trump?", 
+    subtitle = "Estimates based on polls of all adults and polls of likely/registered voters", 
+    caption = "Source: FiveThirtyEight modeling estimates" 
+  ) + 
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+
+---
+
+## Data
+
+.pull-left-wide[
+
 ```{r}
 trump
 ```
+
+]
+
+--
+
+.pull-right-narrow[
+**Aesthetic mappings:**  
+`r emo::ji("check")`  x = `date`  
+`r emo::ji("x")`      y = `rating_value`  
+`r emo::ji("x")`      color = `rating_type`
+
+**Facet:**  
+`r emo::ji("check")`  `subgroup` (Adults and Voters)
+]
 
 ---
 
 ## Goal
 
-.pull-left-wide[
 ```{r echo=FALSE, out.width="100%"}
 trump |>
   pivot_longer(
@@ -782,17 +1068,7 @@ trump |>
   theme_minimal() +
   theme(legend.position = "bottom")
 ```
-]
---
-.pull-right-narrow[
-**Aesthetic mappings:**  
-`r emo::ji("check")`  x = `date`  
-`r emo::ji("x")`      y = `rating_value`  
-`r emo::ji("x")`      color = `rating_type`
 
-**Facet:**  
-`r emo::ji("check")`  `subgroup` (Adults and Voters)
-]
 
 ---
 
@@ -882,9 +1158,12 @@ ggplot(trump_longer,
 
 ---
 
+
+---
+
 class: middle
 
-# Case study: Berkeley admission data
+# Extra slides: Case study: Berkeley admission data
 
 ---
 
@@ -1055,7 +1334,11 @@ ucbadmit |>
 
 ]
 
+
+
+
 ---
+
 
 class: middle
 

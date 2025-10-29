@@ -52,7 +52,157 @@ Today you will practice:
 + joining multiple data frames
 + pivoting data frames to wide or long format
 + planning a data wrangling pipeline to accomplished a desired task/visualization
-+ identifying when Simpson's paradox might be at play
+
+
+---
+
+# A quick refresh of `dplyr` verbs in R
+
+Which of the following allows you to keep rows that meet a certain criteria?
+
+  A. `keep()`
+  
+  B. `where()`
+  
+  C. `filter()`
+  
+  D. `select()`
+  
+  E. `mutate()`
+
+---
+
+# A quick refresh of `dplyr` verbs in R
+
+Which of the following allows you to keep specified columns?
+
+  A. `keep()`
+  
+  B. `colname()`
+  
+  C. `filter()`
+  
+  D. `select()`
+  
+  E. `mutate()`
+
+---
+
+# A quick refresh of `dplyr` verbs in R
+
+Recall the `midwest` dataset you used for homework (dimensions: 437 x 2), where each row is a `county`, and there is data on counties from 5 Midwestern states.
+
+How many rows and columns will the following code produce?
+
+
+``` r
+midwest |&gt; count(state)
+```
+
+A. 437 x 3
+
+B. 5 x 2
+
+C. 1 x 1
+
+D. 5 x 28
+
+
+---
+
+# Still thinking about the `midwest` data...
+
+You want to calculate the average percentage of college-educated adults (percollege) by state.
+Which verbs do you need?
+
+A. `filter()` and mutate()
+
+B. `group_by()` and `summarize()`
+
+C. `mutate()` and `arrange()`
+
+D. `count()` and `summarize()`
+
+---
+
+# Still thinking about the `midwest` data...
+
+You want to keep only counties where less than 10% of the population lives in poverty `(percbelowpoverty)` .
+Which verb do you use?
+
+A. `mutate()`
+
+B. `filter()` 
+
+C. `group_by()`
+
+D. `summarize()`
+
+---
+
+# Still thinking about the `midwest` data...
+
+You want to create a new variable for the proportion of children in the population, using
+`perc_child = popchild / poptotal`.
+ Which verb should you use?
+
+A. `summarize()`
+
+B. `filter()`
+
+C. `mutate()` 
+
+D. `count()`
+
+---
+
+# Still thinking about the `midwest` data...
+
+How many rows will the resulting dataset have?
+
+``` r
+midwest |&gt; 
+  group_by(state) |&gt; 
+  mutate(mean_poverty = mean(percbelowpoverty))
+```
+
+A. One per state
+
+B. One per value of `percbelowpoverty`
+
+C. Same number as the original dataset
+
+D. Depends on missing values
+
+---
+
+# Still thinking about the `midwest` data...
+
+You want to find out which state has the highest average percentage of people in poverty. Which pipeline would give you that result?
+
+
+``` r
+#A
+midwest |&gt; summarize(max(perpoverty))
+
+#B
+midwest |&gt; 
+      group_by(state) |&gt; 
+      summarize(avg_pov = mean(percbelowpoverty)) |&gt; 
+      arrange(desc(avg_pov))
+
+#C
+midwest |&gt; mutate(avg_pov = mean(percbelowpoverty)) |&gt; max()
+
+#D 
+midwest |&gt; count(percbelowpoverty) |&gt; arrange()
+```
+
+---
+
+class: middle
+
+# Data Wrangling: Joining multiple datasets
 
 ---
 
@@ -70,7 +220,7 @@ class: middle
 
 ## Data: Women in science 
 
-Information on 10 women in science who changed the world
+Information on "10 women in science who changed the world"
 
 .small[
 
@@ -258,16 +408,34 @@ class: middle
 
 ``` r
 something_join(x, y)
+
+x |&gt; 
+  something_join(y)
 ```
 
-- `left_join()`: all rows from x
-- `right_join()`: all rows from y
-- `full_join()`: all rows from both x and y
-- `semi_join()`: all rows from x where there are matching values in y, keeping just columns from x
-- `inner_join()`: all rows from x where there are matching values in y, return 
-all combination of multiple matches in the case of multiple matches
-- `anti_join()`: return all rows from x where there are not matching values in y, never duplicate rows of x
-- ...
+#### Mutating joins (add variables in)
+
+- `left_join()`: keeps all rows in x
+- `right_join()`: keeps all rows in y
+- `full_join()`: keeps all rows in x or y
+- `inner_join()`: only keeps rows from x that have a matching key in y
+
+---
+
+## Joining data frames
+
+
+``` r
+something_join(x, y)
+
+x |&gt; 
+  something_join(y)
+```
+
+#### Filtering joins (remove rows based on matches, don't bring in new variables)
+- `semi_join()`: only keeps rows from x that have a match in y; does not bring in y's columns
+- `anti_join()`: only keeps rows from x that do NOT have a match in y; does not bring in y's columns
+
  
 ---
 
@@ -335,11 +503,16 @@ left_join(x, y)
 
 ## `left_join()`
 
+What do you expect? How many rows and columns?
+
 
 ``` r
 professions |&gt;
 * left_join(dates)
 ```
+
+--
+
 
 ```
 ## # A tibble: 10 × 4
@@ -384,12 +557,16 @@ right_join(x, y)
 
 ## `right_join()`
 
+What do you expect? How many rows and columns?
 
 
 ``` r
 professions |&gt;
 * right_join(dates)
 ```
+
+--
+
 
 ```
 ## # A tibble: 8 × 4
@@ -526,11 +703,16 @@ semi_join(x, y)
 
 ## `semi_join()`
 
+What do you expect? How many rows and columns?
+
 
 ``` r
 dates |&gt;
 * semi_join(works)
 ```
+
+--
+
 
 ```
 ## # A tibble: 7 × 3
@@ -622,7 +804,7 @@ class: middle
 
 - Have:
   - Enrolment: official university enrolment records
-  - Survey: Student provided info missing students who never filled it out and including students who filled it out but dropped the class
+  - Survey: Student provided info; missing students who never filled it out and including students who filled it out but dropped the class
 - Want: Survey info for all enrolled in class 
 
 --
@@ -660,6 +842,48 @@ survey
 ## 4     5 Mark    thebakingbuddha
 ```
 ]
+
+---
+
+# Quiz
+
+Which code is guaranteed to retain rows for all students enrolled in the course, but not students who dropped (i.e. are not currently enrolled)?
+
+A. `enrolment |&gt; left_join(survey, by = "id")`
+
+B. `enrolment |&gt; inner_join(survey, by = "id")`
+
+C. `enrolment |&gt; semi_join(survey, by = "id")`
+
+D. `enrolment |&gt; full_join(survey, by = "id")`
+
+---
+
+# Quiz
+
+Which code will return rows for students who did not fill out the survey?
+
+A. `enrolment |&gt; semi_join(survey, by = "id")`
+
+B. `enrolment |&gt; anti_join(survey, by = "id")`
+
+C. `survey |&gt; semi_join(enrolment, by = "id")`
+
+D. `survey |&gt; anti_join(enrolment, by = "id")`
+
+---
+
+# Quiz
+
+Which code will return rows for students who filled out the survey but dropped the course?
+
+A. `enrolment |&gt; semi_join(survey, by = "id")`
+
+B. `enrolment |&gt; anti_join(survey, by = "id")`
+
+C. `survey |&gt; semi_join(enrolment, by = "id")`
+
+D. `survey |&gt; anti_join(enrolment, by = "id")`
 
 ---
 
@@ -721,6 +945,11 @@ survey |&gt;
 
 # Your turn: week_09.qmd
 
+Recall: `flights` contains data about every flight that departed La Guardia, JFK, or Newark airports in 2013
+
+&lt;img src="img/nycflights13.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
 Exercises 1 - 5
 
 ---
@@ -737,6 +966,7 @@ In groups, brainstorm the data wrangling required to create this visualizaton.
 ]
 
 .pull-right[
+
 ![](img/flights_map.png)
 ]
 
@@ -1195,9 +1425,20 @@ Source: [FiveThirtyEight](https://projects.fivethirtyeight.com/trump-approval-ra
 
 ---
 
+## Goal
+
+
+
+Write psuedocode required to create this visualization
+
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-71-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
 ## Data
 
-
+.pull-left-wide[
 
 
 ``` r
@@ -1221,14 +1462,10 @@ trump
 ## # ℹ 2,692 more rows
 ```
 
----
-
-## Goal
-
-.pull-left-wide[
-&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-65-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
+
 --
+
 .pull-right-narrow[
 **Aesthetic mappings:**  
 ✅  x = `date`  
@@ -1238,6 +1475,13 @@ trump
 **Facet:**  
 ✅  `subgroup` (Adults and Voters)
 ]
+
+---
+
+## Goal
+
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-73-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
 
 ---
 
@@ -1282,7 +1526,7 @@ ggplot(trump_longer,
   facet_wrap(~ subgroup)
 ```
 
-&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-67-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-75-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1308,7 +1552,7 @@ ggplot(trump_longer,
 ]
 
 .panel[.panel-name[Plot]
-&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-68-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-76-1.png" width="75%" style="display: block; margin: auto;" /&gt;
 ]
 
 ]
@@ -1339,16 +1583,19 @@ ggplot(trump_longer,
 ]
 
 .panel[.panel-name[Plot]
-&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-69-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-77-1.png" width="75%" style="display: block; margin: auto;" /&gt;
 ]
 
 ]
 
 ---
 
+
+---
+
 class: middle
 
-# Case study: Berkeley admission data
+# Extra slides: Case study: Berkeley admission data
 
 ---
 
@@ -1471,7 +1718,7 @@ ucbadmit |&gt;
 .panelset[
 
 .panel[.panel-name[Plot]
-&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-73-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-81-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 
 .panel[.panel-name[Code]
@@ -1546,7 +1793,7 @@ ucbadmit |&gt;
 .panelset[
 
 .panel[.panel-name[Plot]
-&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-76-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-84-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 
 .panel[.panel-name[Code]
@@ -1570,10 +1817,10 @@ ggplot(ucbadmit, aes(y = gender, fill = admit)) +
 ## Case for gender discrimination?
 
 .pull-left[
-&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-77-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-85-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
-&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-78-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-86-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1623,7 +1870,11 @@ ucbadmit |&gt;
 
 ]
 
+
+
+
 ---
+
 
 class: middle
 
@@ -1650,7 +1901,7 @@ class: middle
 ```
 ]
 .pull-right[
-&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-81-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-89-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1674,7 +1925,7 @@ class: middle
 ```
 ]
 .pull-right[
-&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-83-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-91-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1698,7 +1949,7 @@ class: middle
 ```
 ]
 .pull-right[
-&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-85-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-93-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1722,7 +1973,7 @@ class: middle
 ```
 ]
 .pull-right[
-&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-87-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="04-data-wrangling-2_files/figure-html/unnamed-chunk-95-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---

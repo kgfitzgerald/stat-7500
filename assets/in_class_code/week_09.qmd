@@ -30,6 +30,8 @@ Examine the documentation for the datasets `airports`, `flights`, and `planes`. 
 
 > YOUR ANSWER HERE
 
+## EXAMPLE
+
 Suppose you wanted to make a map of the route of every flight. What variables would you need from which datasets? You need the geographic location of the airports (from `airports`) and the path of flights (i.e., which airports were involved) from `flights`.
 
 We want to join flights to airports. Note these two datasets have no variables in common so we will have to specify the variable to join by using `by =`. Check out the documentation for more information.
@@ -41,15 +43,25 @@ flights |>
 
 ## Exercise 2
 
-Create a new dataset `dest_delays` with the median arrival delay for each destination. *Note this question does not require you to use joins. Make sure to add na.rm = TRUE when computing the median. Check: `dest_delays` should have dimensions 105 x 2.*
+Which airports are in `flights` but not in `airports`? Google to find out what these airports are.
 
 ```{r}
 
 ```
 
+> YOUR ANSWER HERE
+
+Which airports are in `airports` but not in `flights`? What does this tell us about these airports (at least in 2013)?
+
+```{r}
+
+```
+
+> YOUR ANSWER HERE
+
 ## Exercise 3
 
-Create a new dataset `delays_by_airport` by joining `dest_delays` and `airports`. Only include observations that have both delay and airport information. *Note `dest_delays` and `airports` have no variables in common so you will need to specify the variables to join using by as in the example above. Check: `delays_by_airport`* *should have dimensions 101 x 9.*
+Starting with the `flights` dataset, create a new dataset `dest_delays` with the median arrival delay for each destination. *Note, this question does not require you to use joins. Make sure to add na.rm = TRUE when computing the median. Check: `dest_delays` should have dimensions 105 x 2.*
 
 ```{r}
 
@@ -57,13 +69,15 @@ Create a new dataset `delays_by_airport` by joining `dest_delays` and `airports`
 
 ## Exercise 4
 
-Are all of the rows in `dest_delays` included in the new dataset you created by joining `dest_delays` and `airports`? Use an `anti_join` to help investigate this issue. Recall `anti_join(x,y)` returns all rows from `x` without a match in `y`.
+Join the columns in `airports` to `dest_delays` (preserving all rows in `dest_delays`. *Check: `delays_by_airport`* *should have dimensions 105 x 9.*
 
 ```{r}
 
 ```
 
-Where are the above airports are located? *Hint: Google them*
+Based on your answer to Exercise 2, how many rows in `delays_by_airport` do you expect to be missing latitude and longitude information?
+
+> YOUR ANSWER HERE
 
 ## Exercise 5
 
@@ -87,7 +101,7 @@ Finally, create an effective visualization of the data to investigate if there a
 
 ```
 
-## BONUS / Extra mapping fun
+## (FOR LATER) Extra mapping fun
 
 Try re-creating the visualization below and/or exploring other ways to visualized the flights data spatially. *Note, to view the image in your html, download the "flights_map.png" file and place it in the images subfolder of your STAT_7500 folder.*
 
@@ -111,10 +125,8 @@ ggplot() +
   coord_fixed(1.3)
 ```
 
-Adding on the flight trajectories will require some creative data wrangling. Hint: you will need a dataframe with at least 7 columns: the airport ID, latitude & longitude for both the origin and destination airports, and a count column of the number of flights between those dest-origin airports. You can use a `geom_curve()` layer to create the flight curves; the above plot has `curvature = 0.2`.
+Adding on the flight trajectories will require some creative data wrangling. You can use a `geom_curve()` layer to create the flight curves; the above plot has `curvature = 0.2`. Note, you can use different datasets and aesthetic mappings in different `geom` layers (see `geom_polygon()` layer above).
 
 ```{r}
 
 ```
-
-## 
