@@ -69,7 +69,7 @@ Starting with the `flights` dataset, create a new dataset `dest_delays` with the
 
 ## Exercise 4
 
-Join the columns in `airports` to `dest_delays` (preserving all rows in `dest_delays`. *Check: `delays_by_airport`* *should have dimensions 105 x 9.*
+Join the columns in `airports` to `dest_delays` (preserving all rows in `dest_delays` and save the new dataset into `delays_by_airport`. *Check: `delays_by_airport`* *should have dimensions 105 x 9.*
 
 ```{r}
 
