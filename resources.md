@@ -28,5 +28,6 @@ description: A feed containing solutions and miscellaneous resources
 + [Week 01 Slides]({{ site.baseurl }}/files/slides/SAS1_intro_to_SAS.pptx)
 + [Week 02 Slides]({{ site.baseurl }}/files/slides/SAS2.pptx)
 + [Week 03 Slides]({{ site.baseurl }}/files/slides/SAS3.pptx)
++ [Week 09 Slides - R Data Wrangling II](/assets/R_slides/04-data-wrangling-2.html)
 
 
