@@ -85,7 +85,7 @@ portland_matches <- matches |>
 
 Before beginning the analysis, you will need to conduct some data wrangling to look only at the Portland Thorns data.
 
-1.  Inspect the `teams` data to determine the `team_id` for the Portland Thorns. Filter the `matches` dataset to only keep matches where Portland was playing. Save this as a new dataset called `portland_matches`. *Confirm that your new data has `r nrow(portland_matches)` observations before proceeding.*
+1.  Inspect the `teams` data to determine the `external_team_id` for the Portland Thorns. Filter the `matches` dataset to only keep matches where Portland was playing. Save this as a new dataset called `portland_matches`. *Confirm that your new data has `r nrow(portland_matches)` observations before proceeding.*
 
 We want to add in information from the `teams` data into the `matches` data so we can have the team name and abbreviation in addition to just the numeric team id.
 However, we will have to join the `teams` information twice: once for home team and once for away team.
@@ -104,7 +104,7 @@ It then joins these columns to the `portland_matches` data.
 
 ```{r, eval = FALSE}
 home_team_info <- teams |> 
-  select(home_team_id = team_id, 
+  select(home_team_id = external_team_id, 
          home_team_name = team_name, 
          home_team_abbr = team_abbreviation)
 
@@ -164,7 +164,7 @@ player_stats <- purrr::map_df(portland_matches$match_id, safe_load_pms, .progres
 ```
 
 ```{r, echo = FALSE}
-#saveRDS(player_stats, "./labs/data/player_stats.rds")
+#saveRDS(player_stats, "./assets/homework/R_HW_instructions/data/player_stats.rds")
 player_stats <- readRDS("./data/player_stats.rds")
 ```
 
