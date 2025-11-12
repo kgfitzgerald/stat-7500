@@ -74,3 +74,7 @@ Links to all lecture slides and in-class practice code will be provided below.
 
 + [SLIDES: R 05 - Data Wrangling III](/assets/R_slides/05-data-wrangling-3.html)
 + {% include download.html path="assets/in_class_code/week_10.qmd" %}
+
+## Week 11
+
++ [SLIDES: R 06 - Data Importing & Cleaning](/assets/R_slides/06-data-importing-cleaning.html)

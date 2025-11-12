@@ -1,0 +1,193 @@
+---
+title: "Lab 05: Google survey"
+subtitle: "SOLUTIONS"
+author: "Katie Fitzgerald"
+date: "due October 4, 11:59 PM"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_section: false
+    highlight: tango
+    theme: "cosmo"
+link-citations: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+# Load Packages and Data
+
+```{r load-packages, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(viridis)
+library(lubridate)
+library(kableExtra)
+``` 
+
+```{r read-in-data, message = FALSE, warning = FALSE}
+survey <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSWWS4oNf69Rhx9COxKH445CXPl2xq7FpyabaMFpib8f9bFBFDuznskYfWIi97e8lQYl-q1M6zZ62RR/pub?output=csv")
+```
+
+# Exercise 1
+
+```{r ex-1}
+new_names <- c("timestamp", "sch_lvl", "major", "anxious_130",
+               "relevant_career", "relevant_life", "anxious_code", 
+               "extra_circumstances", "laptop", "age", "gender",
+               "race")
+names(survey) <- new_names
+```
+
+# Exercise 2
+
+The data come from two different semesters - Fall and Spring.
+
+```{r}
+survey <- survey %>% 
+  mutate(timestamp = mdy_hms(timestamp))
+
+ggplot(survey, aes(x = timestamp)) +
+  geom_histogram()
+```
+
+# Exercise 3
+
+```{r}
+survey <- survey %>% 
+  mutate(sch_lvl = factor(sch_lvl, levels = c("Freshman", "Sophomore",
+                                              "Junior", "Senior")))
+
+ggplot(survey |> drop_na(sch_lvl), aes(x = fct_rev(sch_lvl))) +
+  geom_bar(fill = "navyblue") +
+  coord_flip() +
+  theme_light() +
+  labs(x = "",
+       y = "Count",
+       title = "What year are you in school?")
+```
+
+# Exercise 4
+
+```{r}
+survey %>% 
+  count(anxious_130) %>% 
+  kbl() %>% 
+  kable_minimal()
+
+ggplot(survey, aes(x = anxious_130)) +
+  geom_bar() +
+  scale_x_continuous(breaks = c(1:10)) +
+  theme_minimal() +
+  labs(x = "Anxious, Scale 1 to 10",
+       y = "Count",
+       title = "On a scale from 1 to 10, how anxious are you about taking MATH 130 - Intro to Statistics?")
+```
+
+# Exercise 5
+
+```{r}
+survey <- survey %>% 
+  mutate(relevant_career = factor(relevant_career, 
+                                  levels = c("Strongly disagree", 
+                                             "Somewhat disagree",
+                                             "Neither agree nor disagree",
+                                             "Somewhat agree",
+                                             "Strongly agree")))
+
+ggplot(survey |> drop_na(relevant_career), 
+       aes(y = 1, fill = relevant_career)) +
+  geom_bar(position = "fill") +
+  theme_minimal() +
+  scale_fill_viridis_d() +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank()) +
+  labs(y = "",
+       x = "Proportion",
+       title = "Statistics seems relevant to my major or career interests",
+       fill = "")
+
+```
+
+# Exercise 6
+
+```{r}
+survey <- survey %>% 
+  mutate(major_recoded = case_when(major %in% c("Kinesiology focus: health professions",
+                                                "Kinesiology") ~ "Kinesiology",
+                                   major %in% c("I am majoring in Political Science", "Political Science") ~ "Political Science",
+                                   major %in% c("Criminal Justice", "Criminal justice") ~ "Criminal Justice",
+                                   major %in% c("international business",
+                                                "Business Management & Honors Humanities",
+                                                "Business management and communication management",
+                                                "Business Management") ~ "Business",
+                                   major == "marketing" ~ "Marketing",
+                                   TRUE ~ major))
+
+ggplot(survey, aes(x = fct_rev(fct_infreq(major_recoded)))) +
+  geom_bar() +
+  coord_flip() +
+  theme_minimal() +
+  labs(x = "",
+       y = "Count",
+       title = "What are you majoring in?")
+```
+
+# Exercise 7
+
+```{r}
+survey <- survey %>% 
+  mutate(gender_recoded = case_when(gender %in% c("female", "Female", 
+                                                  "Female (she/her)", "woman") ~ "Female",
+                                    gender %in% c("male", "Male") ~ "Male"))
+
+ggplot(survey, aes(x = 1, fill = gender_recoded)) +
+  geom_bar(position = "fill") +
+  theme_minimal() +
+  labs(x = "",
+      y = "Proportion",
+      title = "What is your gender?",
+      fill = "") +
+  scale_fill_viridis_d() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+```
+
+# Exercise 8
+
+```{r}
+survey <- survey %>% 
+  mutate(Mac = if_else(grepl("Mac laptop", laptop), "Yes", "No"),
+         iPad = if_else(grepl("iPad", laptop), "Yes", "No"),
+         PC = if_else(grepl("PC/Windows laptop", laptop), "Yes", "No"))
+
+survey_long <- survey %>% 
+  pivot_longer(cols = c("Mac", "iPad", "PC"), names_to = "laptop_type", 
+               values_to = "laptop_access")
+
+ggplot(survey_long, aes(x = laptop_type, fill = laptop_access)) +
+  geom_bar(position = "fill") +
+  coord_flip() +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  labs(x = "",
+       y = "Proportion", 
+       fill = "Access?",
+       title = "Which of the following personal laptops or tablets do you have access to?")
+```
+
+# BONUS
+
+```{r}
+survey |> 
+  pivot_longer(relevant_career:anxious_code) |> 
+  mutate(value = factor(value, 
+                                  levels = c("Strongly disagree", 
+                                             "Somewhat disagree",
+                                             "Neither agree nor disagree",
+                                             "Somewhat agree",
+                                             "Strongly agree"))) |> 
+  ggplot(aes(y = name, fill = value)) +
+  geom_bar(position = "fill") +
+  scale_fill_viridis_d()
+```
+

@@ -974,3 +974,42 @@ ucbadmit |>
   group_by(gender, admit) |>
   summarise(n = n()) 
 ```
+
+
+
+
+
+
+```{r}
+ucbadmit |> 
+  count(dept, gender, admit) |> 
+  group_by(gender, dept) |> 
+  mutate(prop = n/sum(n))
+```
+
+```{r}
+ucbadmit |> 
+  group_by(dept, gender) |> 
+  summarize(prop_admitted = sum(admit == "Admitted")/n())
+```
+
+```{r}
+ucbadmit |> 
+  count(dept, gender, admit) |> 
+  pivot_wider(names_from = dept,
+              values_from = n)
+```
+
+```{r}
+ucbadmit |> 
+  count(dept, gender, admit) |> 
+  pivot_wider(names_from = admit, values_from = n) |> 
+  mutate(n_applied = Rejected + Admitted,
+         prop_admit = Admitted/n_applied) |> 
+  select(-Rejected,
+         n_admitted = Admitted)  |> 
+  kbl() |> kable_minimal()
+  
+```
+
+
