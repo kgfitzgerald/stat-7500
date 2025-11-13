@@ -109,7 +109,7 @@ knitr::include_graphics("img/tidyr-longer-wider.gif")
 
 # BONUS 1
 
-Create a new variable called `semester` that uses the time variable to designate whether each student was in MATH 130 in a Fall or Spring semester. *Hint: the function `month()` applied to a date will extract just the month, which may helpful in determining semester.*. Use this new variable to investigate whether students in the Fall or Spring semester were more anxious about MATH 130 on average.  
+Create a new variable called `semester` that uses the time variable to designate whether each student was in MATH 130 in a Fall or Spring semester. *Hint: the function `month()` applied to a date will extract just the month, `year()` will extract the year, etc, which may helpful in determining semester.*. Use this new variable to investigate whether students in the Fall or Spring semester were more anxious about MATH 130 on average.  
 
 # BONUS 2
 
