@@ -78,3 +78,10 @@ Links to all lecture slides and in-class practice code will be provided below.
 ## Week 11
 
 + [SLIDES: R 06 - Data Importing & Cleaning](/assets/R_slides/06-data-importing-cleaning.html)
+
+## Week 12
+
++ [SLIDES: R 07 - Working with Strings](/assets/R_slides/07-strings.html)
++ {% include download.html path="assets/in_class_code/week_12.qmd" %}
+
+
