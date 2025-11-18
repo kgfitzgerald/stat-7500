@@ -1,0 +1,87 @@
+---
+title: "Lab 01: Hello R!"
+subtitle: "SOLUTIONS"
+author: "Katie Fitzgerald"
+date: "due September 6"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+    number_section: no
+    highlight: tango
+    theme: cosmo
+    fig_height: 7
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(openintro)
+library(datasauRus)
+```
+
+# Exercise 1
+
+There are `r nrow(datasaurus_dozen)` rows and `r ncol(datasaurus_dozen)` in the `datasaurus_dozen` dataset. The names of the variables are below.
+
+```{r ex-1}
+names(datasaurus_dozen)
+```
+
+# Exercise 2 
+
+```{r ex-2}
+dino_data <- datasaurus_dozen %>%
+  filter(dataset == "dino")
+
+ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
+  geom_point()
+
+dino_data %>%
+  summarize(r = cor(x, y))
+```
+
+# Exercise 3
+
+The correlation for the `dino` and `star` datasets are very similar to one another, even though they have very different data when visualized. 
+
+```{r ex-3}
+star_data <- datasaurus_dozen %>%
+  filter(dataset == "star")
+
+ggplot(data = star_data, mapping = aes(x = x, y = y)) +
+  geom_point()
+
+star_data %>%
+  summarize(r = cor(x, y))
+```
+
+# Exercise 4
+
+The correlation for the `dino` and `circle` datasets are very similar to one another, even though they have very different data when visualized. 
+
+```{r ex-4, fig.height=5, fig.width=5}
+circle_data <- datasaurus_dozen %>%
+  filter(dataset == "circle")
+
+ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
+  geom_point()
+
+circle_data %>%
+  summarize(r = cor(x, y))
+```
+
+# Exercise 5
+
+```{r ex-5}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
+  geom_point()+
+  facet_wrap(~ dataset, ncol = 3) +
+  theme(legend.position = "none")
+
+datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarize(r = cor(x, y)) %>%
+  print(13)
+```

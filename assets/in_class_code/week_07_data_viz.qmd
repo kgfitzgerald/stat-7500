@@ -144,7 +144,6 @@ What are two more questions you could investigate using this data? For each, sta
 
 ## BONUS FUN
 
-Recreate the plot below. (You can view the image on the course website; if you want to embed it in this document, download the image and put it in a folder called images that shares the same root directory as this .qmd file).(Hints for creating the plot: [The `ggplot2` reference page](https://ggplot2.tidyverse.org/reference/ggtheme.html) will be helpful in determining the theme. The `size` of the points is 0.75.) 
+Recreate the plot below. (You can view the image on the course website; if you want to embed it in this document, download the image and put it in a folder called images that shares the same root directory as this .qmd file).(Hints for creating the plot: [The `ggplot2` reference page](https://ggplot2.tidyverse.org/reference/ggtheme.html) will be helpful in determining the theme. The `size` of the points is 0.75.)
 
 ![](images/bonus.png)
-

@@ -1,0 +1,165 @@
+---
+title: "Lab 04: Women's Soccer"
+subtitle: "SOLUTIONS"
+author: "Katie Fitzgerald"
+date: "due Tuesday, September 26 at 4:20pm"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_section: false
+    highlight: tango
+    theme: "cosmo"
+link-citations: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+# Load Packages and Data
+
+```{r load-package, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(viridis)
+library(kableExtra)
+library(ggridges)
+#library(scales)
+# install.packages("devtools")
+devtools::install_github("nwslR/nwslR", 
+                         ref = "v0.0.0.9002")
+library(nwslR)
+``` 
+
+```{r read-in-data, message = FALSE, warning = FALSE}
+matches <- load_matches()
+players <- load_players()
+teams <- load_teams()
+metrics <- load_metrics()
+```
+
+# Exercise 1
+
+```{r}
+portland_matches <- matches %>% 
+  filter(home_team_id == 8 | away_team_id == 8)
+```
+
+# Exercise 2
+
+```{r}
+home_team_info <- teams %>% 
+  select(home_team_id = team_id, 
+         home_team_name = team_name, 
+         home_team_abbr = team_abbreviation)
+
+portland_matches <- portland_matches %>% 
+  left_join(home_team_info)
+
+away_team_info <- teams %>% 
+  select(away_team_id = team_id, 
+         away_team_name = team_name, 
+         away_team_abbr = team_abbreviation)
+
+portland_matches <- portland_matches %>% 
+  left_join(away_team_info)
+```
+
+# Exercise 3
+
+```{r}
+portland_matches <- portland_matches %>% 
+  mutate(POR_points = if_else(home_team_abbr == "POR", 
+                              home_team_score, away_team_score),
+      OPP_points = if_else(home_team_abbr == "POR", 
+                            away_team_score, home_team_score),
+      result = case_when(POR_points  >  OPP_points ~ "Win",
+                         POR_points < OPP_points ~ "Loss",
+                         POR_points == OPP_points ~ "Tie"))
+```
+
+# Exercise 4
+
+```{r}
+ggplot(portland_matches, aes(x = result)) +
+  geom_bar()
+```
+
+# Exercise 5
+
+```{r}
+ggplot(portland_matches, aes(x = result)) +
+  facet_wrap(~season) +
+  geom_bar()
+```
+
+# Exercise 6
+
+```{r}
+portland_matches <- portland_matches %>% 
+  mutate(POR_home_away = if_else(home_team_abbr == "POR", 
+                             "home", "away"))
+
+ggplot(portland_matches, aes(y = POR_points, x = POR_home_away)) +
+  geom_boxplot()
+
+ggplot(portland_matches, aes(x = POR_points, y = POR_home_away)) +
+  geom_density_ridges()
+```
+
+# Exercise 7
+
+```{r}
+portland_matches %>% 
+  group_by(POR_home_away) %>% 
+  summarize(wins = sum(result == "Win"),
+                n = n()) %>% 
+  mutate(win_perc = wins/n) %>% 
+  kable(format = "html", table.attr = "style='width:50%;'") %>% 
+  kableExtra::kable_styling()
+```
+
+# Exericse 8
+
+```{r, eval = FALSE}
+# * A small number of matches do not have data, so we wrap this in a safe call to ensure this runs without error 
+safe_load_pms <- purrr::possibly(load_player_match_stats, otherwise = data.frame())
+
+player_stats <- purrr::map_df(portland_matches$match_id, safe_load_pms, .progress = TRUE)
+#saveRDS(player_stats, "./labs/data/player_stats.rds")
+```
+
+```{r}
+player_stats <- readRDS("./data/player_stats.rds")
+summary_data <- player_stats %>% 
+  filter(team_id == 8) %>% 
+  select(player_id, team_id, shots_total, shots_outside_box, goals) %>% 
+  group_by(player_id) %>% 
+  summarize(shots_total = sum(shots_total),
+            shots_outside_box = sum(shots_outside_box, na.rm = TRUE),
+            goals = sum(goals, na.rm = TRUE)) %>%
+  filter(shots_total >= 15) %>% 
+  mutate(prop_outside_box = shots_outside_box/shots_total,
+         prop_goals = goals/shots_total) 
+
+summary_data %>% 
+  arrange(desc(prop_outside_box)) %>% 
+  left_join(players) %>% 
+  slice(1:10) %>% 
+  ggplot(aes(x = prop_outside_box, 
+             y = reorder(player_match_name, prop_outside_box))) +
+  geom_col(fill = "purple") +
+  theme_minimal() +
+  scale_x_continuous(labels = scales::percent) +
+  labs(x = "Percentage of shots taken outside the box",
+       y = "",
+       title = "Portland players with Highest % of shots taken outside the box",
+       subtitle = "Minimum 15 shots")
+
+summary_data %>% 
+  arrange(desc(prop_goals)) %>% 
+  left_join(players) %>% 
+  slice(1:10) %>% 
+  select(player_match_name, shots_total, goals, prop_goals) %>% 
+  kable(format = "html", table.attr = "style='width:50%;'") %>% 
+  kableExtra::kable_styling()
+```
+

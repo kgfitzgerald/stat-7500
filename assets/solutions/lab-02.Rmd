@@ -1,0 +1,169 @@
+---
+title: "Lab 02: Data Visualization"
+subtitle: ""
+author: "SOLUTIONS"
+date: "due September 13, 11:59 PM"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_section: false
+    highlight: tango
+    theme: "cosmo"
+link-citations: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+# Load Packages
+
+```{r load-packages, message = FALSE, warning = FALSE}
+library(tidyverse) 
+library(viridis)
+library(ggridges)
+``` 
+
+# Load Data
+```{r load-data, message = F}
+anes <- read_csv("data/anes2020_subset.csv")
+```
+
+# Exercise 1
+
+This data was collected as part of the American National Election Studies (ANES), which is a collaboration of Stanford University and the University of Michigan, with funding from the National Science Foundation (NSF). Over 8,000 eligible voters were sampled between August 2020 and Election Day on November 3, 2020. 
+
+# Exercise 2
+
+There are `r nrow(anes)` rows and `r ncol(anes)` columns in the `anes` dataset. 
+```{r ex-1}
+nrow(anes)
+ncol(anes)
+```
+
+# Exercise 3
+
+The most common ideology rating is 4, which is the exact middle of the scale from liberal to conservative. Respondents tend to be more moderate than ideologically extreme. 
+
+```{r ex-2, warning = FALSE}
+ggplot(anes, aes(x = ideology)) +
+  geom_bar() +
+  labs(x = "Ideology - Most Liberal (1) to Most Conservative (7)",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+# Exercise 4
+
+Those with the most liberal ideologies tend to live in city areas, whereas those that are most conservative tend to live in rural areas. The proportion of non-response is slightly higher for those with more conservative ideologies, but not substantially. 
+
+```{r ex-3, warning = FALSE}
+ggplot(anes, aes(x = ideology, fill = urbanrural)) +
+  geom_bar(position = "fill") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  labs(x = "Ideology - Most Liberal (1) to Most Conservative (7)",
+       y = "Proportion") +
+  theme_minimal()
+```
+
+# Exercise 5
+
+People tend to view scientists favorably. The distribution is very left-skewed, with one, possibly two, prominent peak(s) at roughly 100 and 80. 
+
+```{r ex-4, message = FALSE, warning = FALSE}
+ggplot(anes, aes(x = scientists)) +
+  geom_histogram(binwidth = 10, color = "white") +
+  theme_minimal() +
+  labs(x = "Feeling thermometer rating \n(0 = coolest rating, 100 = warmest rating)",
+       y = "Count",
+       title = "How warmly do respondents feel towards scientists?")
+```
+
+# Exercise 6
+
+Those who hunt and fish tend to be more politically conservative.
+
+```{r ex-5, message = FALSE, warning = FALSE}
+anes %>%
+  drop_na(hunt_fish) %>%
+  mutate(hunted_fished = ifelse(hunt_fish == 0, "Did Not Hunt or Fish",  
+                                "Hunted or Fished")) %>%
+  ggplot(aes(x = hunted_fished, y = ideology)) +
+    geom_boxplot() +
+    theme_minimal() +
+    labs(x = "",
+         y = "Political ideology \n(1 = most liberal, 7 = most conservative)")
+  
+```
+
+# Exercise 7
+
+```{r ex-6, message = FALSE, warning = FALSE}
+anes %>%
+  drop_na(hunt_fish) %>%
+  mutate(hunted_fished = ifelse(hunt_fish == 0, "Did Not Hunt or Fish",  
+                                "Hunted or Fished")) %>%
+  ggplot(aes(y = hunted_fished, x = ideology)) +
+    geom_density_ridges() +
+    theme_minimal() +
+    labs(y = "",
+         x = "Political ideology \n(1 = most liberal, 7 = most conservative)")
+```
+
+# Exercise 8
+
+The ridgeplot gives more insight into the full distribution of responses for each group (e.g. the most common political ideology rating is 6 among those who hunt and fish), however the boxplot gives a simpler depiction of the comparison between the two groups. 
+
+# Exercise 9
+
+This is not an especially useful visualization because there is overplotting and it's difficult to discern the distribution of ratings about scientists. Additionally, education level is plotted as numeric even though it is categorical. 
+
+```{r ex-8, message = FALSE, warning = FALSE}
+ggplot(anes, aes(x = education, y = scientists)) +
+  geom_point() +
+  geom_smooth(method = "lm") + 
+  theme_minimal() + 
+  labs(x = "Education level \n(0 = less than high school, 7 = professional degree)",
+       y = "Warmness towards scientists \n(0 = coolest rating, 100 = warmest rating)")
+```
+
+# Exercise 10
+
+As education level increases, warm feelings towards scientists also tend to increase. The relationship (slope) is about the same for both hunters/fishers and non-hunters/fishers, although the overall average (intercept) is lower for those who hunted or fished.
+
+```{r ex-9, message = FALSE, warning = FALSE}
+set.seed(18)
+anes2 <- anes %>%
+  sample_frac(.10)
+
+anes2 %>% 
+  drop_na(hunt_fish) %>%
+  mutate(hunted_fished = ifelse(hunt_fish == 0, "Did Not Hunt or Fish",  
+                                "Hunted or Fished")) %>% 
+  ggplot(aes(x = education, y = scientists)) +
+    facet_wrap(~hunted_fished) +
+    geom_point() +  
+    geom_smooth(method = "lm", se = FALSE) +
+    labs(x = "Education level \n(0 = less than high school, 7 = professional degree)",
+       y = "Warmness towards scientists \n(0 = coolest rating, 100 = warmest rating)")
+```
+
+# Exercise 11
+
+What is the relationship between political ideology and warmness towards scientists?
+
+```{r}
+ggplot(anes, aes(x = scientists, y = factor(ideology))) +
+  geom_density_ridges() +
+  theme_minimal() +
+  labs(x = "Feeling thermometer rating \n(0 = coolest rating, 100 = warmest rating)",
+       y = "Political ideology \n(1 = most liberal, 7 = most conservative)",
+       title = "How warmly do respondents feel towards scientists?",
+       subtitle = "By political ideology")
+```
+
+# Exercise 12
+
+Most eligible U.S. voters identify as moderate, but there are significant differences in political ideology by urban/rural areas. Most U.S. eligible voters have favorable views towards scientists, but this differs by education level and political ideology. Hunting and fishing tends to be associated with less favorable views towards scientists overall as well as more conservative political leanings. 
+
+This data is likely well-representative of U.S. eligible voters, since it comes from a formal nationally representative sample. However, limitations may include non-response on some questions. It would be interesting to see other data on feelings towards scientists by religious identity/practice.

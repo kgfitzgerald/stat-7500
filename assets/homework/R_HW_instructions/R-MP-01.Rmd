@@ -148,7 +148,7 @@ happiness <- read_excel("data/World Happiness 2023.xlsx")
 
 6. Filter the data to keep only the year 2023. For each of the following variables (by themselves), produce an appropriate visualization: `happiness`, `logGDP`, `life_exp`, `social_support`, `freedom_choices_cat`, `corruption`
 
-7. Using the 2023 data, produce graphs of happiness as the dependent (y) variable and each other variable from Exercise 6 as the independent (x) variables (one at a time; 4 total visualizations). For scatterplots, include a smoothed curve (geom_smooth) as well. 
+7. Using the 2023 data, produce graphs of happiness as the dependent (y) variable and each other variable from Exercise 6 as the independent (x) variables (one at a time; 5 total visualizations). For scatterplots, include a smoothed curve (geom_smooth) as well. 
 
     - Which variables appear to be most correlated with happiness? Explain your answer.
 

@@ -1,0 +1,169 @@
+---
+title: "R HW 03: Data Wrangling"
+author: "YOUR NAME HERE"
+date: "`r Sys.Date()`"
+format: 
+  html:
+    self-contained: true
+    toc: true
+    toc_float: true
+    number_section: false
+    highlight: "tango"
+    theme: "cosmo"
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+
+library(tidyverse)
+library(scales)
+library(ggbeeswarm)
+```
+
+# Load Data
+
+```{r load-data, message = F}
+midwest <- ggplot2::midwest
+```
+
+# Exercise 1
+
+```{r}
+midwest |> 
+  count(state) |> 
+  arrange(desc(n))
+```
+
+> YOUR ANSWER HERE
+
+# Exercise 2
+
+```{r ex-2}
+midwest |> 
+  count(county) |> 
+  filter(n == 5)
+```
+
+> YOUR ANSWER HERE
+
+# Exercise 3
+
+```{r ex-3}
+#Identify the counties with a population density higher than 25,000
+midwest |> 
+  filter(popdensity > 25000) |> 
+  select(county, state, popdensity, poptotal, area) |> 
+  arrange(desc(popdensity))
+
+#Identify the county with the highest population density.
+midwest |> 
+  select(county, state, popdensity, poptotal, area) |> 
+  filter(popdensity == max(popdensity))
+```
+
+# Exercise 4
+
+```{r ex-4}
+midwest |> 
+  summarize(med_popdensity = median(popdensity, na.rm = TRUE),
+            q1 = quantile(popdensity, 0.25, na.rm = TRUE),
+            q3 = quantile(popdensity, 0.75, na.rm = TRUE))
+```
+
+# Exercise 5
+
+```{r ex-5}
+midwest <- midwest |>
+  mutate(metro = ifelse(inmetro == 1, "Yes", "No"))
+
+midwest |> 
+  group_by(state) |> 
+  count(metro) |> 
+  mutate(prop = n/sum(n)) |> 
+  filter(metro == "Yes")
+```
+
+# Dataset #2
+
+```{r}
+nc_county <- read_csv("data/nc-county.csv")
+```
+
+# Exercise 6
+
+```{r ex-6}
+dim(nc_county)
+
+nc_county <- nc_county |> 
+  mutate(p_edu_he = p_edu_scnd + p_edu_ndc + p_edu_assoc +
+           p_edu_ba + p_edu_mapl)
+
+dim(nc_county)
+```
+
+# Exercise 7
+
+```{r ex-7}
+nc_county |> 
+  summarize(min = min(p_edu_he),
+            q1 = quantile(p_edu_he, 0.25),
+            med = median(p_edu_he),
+            mean = mean(p_edu_he),
+            q3 = quantile(p_edu_he, 0.75),
+            max = max(p_edu_he))
+```
+
+# Exercise 8
+
+```{r}
+nc_county |> 
+  group_by(county_type) |> 
+  summarize(min = min(p_edu_he),
+            q1 = quantile(p_edu_he, 0.25),
+            med = median(p_edu_he),
+            mean = mean(p_edu_he),
+            q3 = quantile(p_edu_he, 0.75),
+            max = max(p_edu_he))
+```
+
+# Exercise 9
+
+```{r ex-9}
+nc_county |> 
+  group_by(county_type) |> 
+  mutate(lower = quantile(p_edu_he, 0.25) - 1.5*IQR(p_edu_he),
+         upper = quantile(p_edu_he, 0.75) + 1.5*IQR(p_edu_he)) |> 
+  filter(p_edu_he < lower | p_edu_he > upper) |> 
+  select(county, county_type, p_edu_he) |> 
+  arrange(desc(p_edu_he))
+```
+
+# Exercise 10
+
+```{r ex-10}
+ggplot(nc_county, aes(x = p_edu_he, y = median_hh_income)) +
+  geom_point() +
+  geom_smooth() +
+  scale_x_continuous(labels = percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = dollar_format())
+
+nc_county |> 
+  filter(p_edu_he < 0.4 | p_edu_he > 0.8) |> 
+  select(county, p_edu_he, median_hh_income)
+```
+
+> YOUR ANSWER HERE
+
+# Exercise 11
+
+> YOUR QUESTION HERE
+
+```{r}
+
+```
+
+> YOUR COMMENTS HERE

@@ -254,8 +254,6 @@ Ask for help on Piazza or in office hours if you need assistance.
 
 Recreate the boxplot given in Exercise 9. You can use the following tips:
 
-- x-axis: You learned how to format the x-axis as percentages in class and had a hint about it in your previous homework assignment. You can use the same approach here.
-
 - Points: The points are drawn with the `geom_beeswarm()` function from the **ggbeeswarm** package.
 
 - Outliers: The outliers in the box plots are drawn as _open circles_. You can specify this with the `outlier.shape` argument in `geom_boxplot()`. You can also adjust the size of the outliers with the `outlier.size` argument. The ggplot2 [aesthetic specifications documentation](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html#point) has a list of shape names you can use for help.
