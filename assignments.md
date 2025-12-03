@@ -74,6 +74,9 @@ Instructions and/or data files for each homework are provided by the links below
   + {% include download.html path="assets/homework/R_HW_templates/R_MP_01.qmd" %}
   + [Data: Avengers](/assets/homework/R_HW_templates/data/avengers.csv)
   + [Data: World Happiness 2023](/assets/homework/R_HW_templates/data/World Happiness 2023.xlsx)
+  
++ R Mini Project 02 (due Wednesday, December 17, 11:59pm)
+  + [Instructions](/assets/homework/R_HW_instructions/R-MP-02.html)
 
 ## Reading annotations (due Wednesdays, 6:15pm)
 

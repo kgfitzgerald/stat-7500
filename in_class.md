@@ -84,4 +84,11 @@ Links to all lecture slides and in-class practice code will be provided below.
 + [SLIDES: R 07 - Working with Strings]({{ site.baseurl }}/assets/R_slides/07-strings.html)
 + {% include download.html path="assets/in_class_code/week_12.qmd" %}
 
+## Week 13 - No class (Thanksgiving)
+
+## Week 14
+
++ [SLIDES: R 08 - Web Scraping]({{ site.baseurl }}/assets/R_slides/08-scraping.html)
+
+
 

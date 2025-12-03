@@ -1,0 +1,92 @@
+---
+title: "student_lab_02"
+format: html
+---
+
+```{r}
+ggplot(anes, aes(x = ideology)) +
+geom_bar(fill = "lightpink") +
+labs(
+title = "Distribution of Respondents' Ideology",
+x = "Ideology (1 = Liberal, 7 = Conservative)",
+y = "Number of Respondents"
+) +
+theme_minimal()
+
+ggplot(na.omit(anes), aes(x = factor(ideology), fill = urbanrural)) +
+geom_bar(position = "fill") +
+labs(
+title = "Ideology by Urban/Rural Residence",
+x = "Ideology (1 = Liberal, 7 = Conservative)",
+y = "Proportion of Respondents",
+fill = "Urban/Rural"
+) +
+theme_minimal()
+table(anes$ideology, useNA = "ifany")
+mean(is.na(anes$ideology))
+
+ggplot(na.omit(anes), aes(x = scientists)) +
+geom_histogram(binwidth = 5, fill = "skyblue", color = "white") +
+labs(
+title = "Distribution of Feelings Toward Scientists",
+x = "Feeling Thermometer Score (0–100)",
+y = "Number of Respondents"
+) +
+theme_minimal()
+
+anes |>
+drop_na(hunt_fish, ideology) |>
+mutate(hunted_fished = ifelse(hunt_fish == 0, "Did Not Hunt or Fish",
+"Hunted or Fished")) |>
+ggplot(aes(x = hunted_fished, y = ideology, fill = hunted_fished)) +
+geom_boxplot() +
+labs(
+title = "Ideology by Hunting or Fishing Behavior",
+x = "Hunting/Fishing Status",
+y = "Ideology (1 = Liberal, 7 = Conservative)",
+fill = "Group"
+) +
+theme_minimal()
+
+anes |>
+drop_na(hunt_fish) |>
+mutate(hunted_fished = ifelse(hunt_fish == 0, "Did Not Hunt or Fish",
+"Hunted or Fished")) |>
+ggplot(aes(x = ideology, y = hunted_fished, fill = hunted_fished)) +
+geom_density_ridges(alpha = 0.7, scale = 1) +
+labs(
+title = "Distribution of Ideology by Hunting/Fishing Behavior",
+x = "Ideology (1 = Liberal, 7 = Conservative)",
+y = "Group",
+fill = "Hunting/Fishing Status"
+) +
+theme_minimal()
+
+ggplot(na.omit(anes), aes(x = education, y = scientists)) +
+geom_point(alpha = 0.6, color = "steelblue") +
+geom_smooth(method = "lm", color = "hotpink", se = TRUE) +
+labs(
+title = "Relationship Between Education and Feelings Toward Scientists",
+x = "Education Level",
+y = "View of Scientists (0–100)"
+) +
+theme_minimal()
+
+anes |>
+drop_na(education, ideology) |>
+mutate(
+ideology_strength = abs(ideology - 4),
+education_f = as.factor(education)
+) |>
+ggplot(aes(x = education_f, y = ideology_strength, fill = education_f)) +
+geom_boxplot() +
+labs(
+title = "Ideological Strength by Education Level",
+x = "Education Level",
+y = "Ideological Strength (Distance from Moderate = 4)",
+fill = "Education Level"
+) +
+theme_minimal()
+```
+
+

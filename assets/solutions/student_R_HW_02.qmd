@@ -1,0 +1,287 @@
+---
+title: "R HW 02: Data Visualization"
+author: "Michael Sturman"
+date: "`r Sys.Date()`"
+format: 
+  html:
+    self-contained: true
+    toc: true
+    toc_float: true
+    number_section: false
+    highlight: "tango"
+    theme: "cosmo"
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+library(tidyverse) 
+library(viridis)
+library(ggridges)
+options(warn=-1)
+```
+
+# Load Data
+
+```{r load-data, message = F}
+anes <- read_csv("data/anes2020_subset.csv")
+```
+
+# Exercise 1
+
+Provide a brief description of the data collection process - who collected the data, when was it collected, who was surveyed, and anything else you find relevant/interesting.
+
+The data was collected by ANES (American National Election Studies). ANES have continually fielded these surveys since 1948, aiming to present a broad range of data on the social background, political values and general opinions of the American public. The exact questions are subject to some change to reflect the shift of national dialogue over time (questions that might have given a valid reflection of the contemporary socio-political landscape of the country in 1948 probably would not today).
+
+All respondents are interviewed during the two months preceding the November election (presidential) and then re-interviewed during the subsequent two months. The questions are split into those necessary for tracking long term trends and those necessary to understand the political zeitgeist.
+
+The 2020 survey had it's respondents randomly assigned to 3 modes of data collection - web only, mixed web and mixed video. New content for the 2020 survey included questions relevant to the COVID pandemic and the rise of scepticism towards scientists.
+
+https://www.icpsr.umich.edu/web/ICPSR/studies/38034
+
+# Exercise 2
+
+How many rows are in the anes dataset? How many columns? Please include code and output to support your response.
+
+```{r ex-2}
+nrow(anes)
+ncol(anes)
+```
+
+8280 rows, 6 columns
+
+# Exercise 3
+
+Create a bar chart showing the ideology of the respondents, with the count on the y-axis.
+
+Please remember to include labels.
+
+What is the most common ideology?
+
+Do respondents tend to be moderate or more ideologically extreme?
+
+```{r ex-3}
+ggplot(anes, aes(x=ideology)) + 
+  geom_histogram(binwidth=1) +
+  labs(
+    x="Ideology",
+    y="Frequency",
+    title="Respondents Ideology Plot"
+  )+theme_minimal() + theme(panel.grid.minor=element_blank())
+```
+
+The most common ideology per the graph below is 4. Ideology is self reported on a 1 to 7 scale ranging from most liberal (1) to most conservative (7). 4 is right in the middle of this range so can be interpreted as centrist/moderate.
+
+There seems to be a slightly higher freqency of people self reporting in the extreme sections of the right than there is for the corresponding extreme sections of the left.
+
+Note - the histogram drops off NA values (1224 of them to be precise)
+
+# Exercise 4
+
+Now, let’s examine whether ideologies are different based upon where people live. Please make a filled bar plot, showing one bar for each ideology, with the percentage of respondents on the y-axis going from 0-1, and the fill determined by urbanrural.
+
+You are encouraged but not required to use viridis colors.
+
+Please remember to include labels.
+
+Where do people of different ideologies tend to live?
+
+Does the percentage of non-responses (i.e., people who said NA) vary much by ideology?
+
+```{r ex-4}
+anes_ex4 <- anes
+anes_ex4$ideology <- as.factor(anes_ex4$ideology)
+
+ggplot(anes_ex4, aes(x=urbanrural, fill=ideology)) +
+  geom_bar(position="fill")+
+  scale_color_viridis(option="viridis")+
+  labs(
+    x="Urban/Rural",
+    y="Cumulative Fraction",
+    title="Urban/Rural Ideology Plot"
+  )+
+  theme(axis.text.x=element_text(size=rel(0.8)))+
+  theme_minimal() + theme(panel.grid.minor=element_blank())
+```
+
+```{r ex-4 p2}
+anes_ex42 <- anes
+anes_ex42$ideology <- as.factor(anes_ex42$ideology)
+
+anes_nona <- anes_ex42 %>%
+    filter(!is.na(urbanrural)) %>% filter(!is.na(ideology))
+
+ggplot(anes_nona, aes(x=urbanrural, fill=ideology)) +
+  geom_bar(position="fill")+
+  scale_color_viridis(option="viridis")+
+  labs(
+    x="Urban/Rural",
+    y="Cumulative Fraction",
+    title="Urban/Rural Ideology Plot [without NAs]"
+  )+
+  theme(axis.text.x=element_text(size=rel(0.8)))+
+  theme_minimal() + theme(panel.grid.minor=element_blank())
+
+```
+
+There is a roughly equal fraction of moderates in all places, seeming to constitute \~20% of the population. In the suburbs, there is a relatively even split between left leaning respondents and right leaning respondents. In big cities the left is more dominant, and in smaller towns/rural areas the right is (I output a second plot which has the non-respondents filtered out to make this a bit easier to interpret).
+
+The proportion is fairly constant across different places of residence, with a the only notable exception being the suburbs which show a distinctly lower rate of non-respondence.
+
+# Exercise 5
+
+How do people view scientists? Please make a histogram with the feeling thermometer on the x-axis and the number of respondents on the y-axis. Then, please comment on features of the histogram such as skewness and peaks.
+
+```{r ex-5}
+ggplot(anes, aes(x=scientists)) + 
+  geom_histogram(binwidth = 10) +
+  labs(
+    x="Opinion of Scientists",
+    y="Frequency",
+    title="View of Scientists Plot"
+  )+
+  theme_minimal() + theme(panel.grid.minor=element_blank())
+```
+
+The general opinion of scientists is high, with a a few notable peaks around 100 and 70. There is a long tail that extends all the way down to 0, with a bulk of the respondents answering somewhere in the 50-100 region.
+
+# Exercise 6
+
+Does the ideology of those who have gone hunting or fishing in the past year differ from those who haven’t? Please make side-by-side boxplots of these two groups.
+
+```{r ex-6}
+anes_ex6 <- anes |>
+            drop_na(hunt_fish) |>
+            mutate(hunted_fished = ifelse(hunt_fish == 0, "Did Not Hunt or Fish",  
+                                          "Hunted or Fished"))
+
+ggplot(anes_ex6, aes(x=hunted_fished, fill=ideology, group=ideology))+
+  geom_bar(position="fill")+
+  labs(
+    x="Hunted/Fished",
+    y="Cumulative Proportion",
+    title="Hunted/Fished Ideology Boxplots",
+  )+
+  scale_fill_viridis(option="viridis")+
+  theme_minimal() + theme(panel.grid.minor=element_blank())
+
+```
+
+Those who have hunted or fished in the past year tend to lean more to the right than those who have not. It is possible that this is due to hunting/fishing being a fairly good proxy for someone living in a more rural area. Hunting in particular presupposes the ownership of a firearm (or at least a bow/crossbow) which also selects for people on the right.
+
+# Exercise 7
+
+Explore the same question as in Exercise 6, this time using geom_density_ridges() to construct a ridge plot as an alternative to side-by-side box plots.
+
+```{r ex-7}
+library(ggridges)
+anes_ex7 <- anes_ex6
+anes_ex7$ideology <- as.factor(anes_ex7$ideology)
+
+
+ggplot(anes_ex7, aes(x=ideology, y=hunted_fished, group=hunted_fished, fill=hunted_fished))+
+  geom_density_ridges()+
+  labs(
+    y='',
+    x='ideology',
+    title='Hunted/Fished Ideology Density Ridge'
+  )+
+  theme_minimal() + theme(panel.grid.minor=element_blank())
+
+
+```
+
+```{r ex-7 p2}
+library(ggridges)
+
+anes_ex7_nona <- anes_ex7 %>%
+    filter(!is.na(ideology)) 
+
+ggplot(anes_ex7_nona, aes(x=ideology, y=hunted_fished, group=hunted_fished, fill=hunted_fished))+
+  geom_density_ridges()+
+  labs(
+    y='',
+    x='ideology',
+    title='Hunted/Fished Ideology Density Ridge - no NAs'
+  )+
+  theme_minimal() + theme(panel.grid.minor=element_blank())
+
+
+```
+
+# Exercise 8
+
+Describe what you observe in both plots from Exercises 6 & 7 and what you learn from one plot that you do not see in the other or that adds additional context to the other.
+
+Both plots show a strong right wing lean among those who have hunted or fished within the last year. The breakdown of those who did not hunt or fish in the last year skews slightly left, but is much more symmetric around the ideology rating of 4 (the moderate political position). The later conclusion is easier to draw from the density ridge plot
+
+# Exercise 9
+
+Is there a relationship between a respondent’s education level and how they view scientists? Please make a scatterplot of these two variables with education on the x-axis and view of scientists on the y-axis.
+
+Include a line of best fit using a geom_smooth() layer with the option method = "lm".
+
+Do you think this is an especially useful visualization? Why or why not?
+
+```{r ex-9}
+ggplot(anes, aes(x=education, y=scientists))+
+  geom_point()+
+  geom_smooth(method='lm')+
+  theme_minimal() + theme(panel.grid.minor=element_blank())
+
+```
+
+This visualisation is not useful at all. it would be more useful to do a plot of density ridges similar to what we did for hunting/fishing above - see below.
+
+```{r ex-9 p2}
+anes_ex92 <- anes
+anes_ex92$education<-as.factor(anes_ex92$education)
+
+ggplot(anes_ex92, aes(x=scientists, y=education, group=education, fill=education))+
+  geom_density_ridges()+
+  theme_minimal() +    theme(panel.grid.minor=element_blank())+
+  labs(
+    x="Approval of Scientists (0-100)",
+    y="Education Level",
+    title="Education/Approval of Scientists Ridge Plot"
+  )
+
+
+```
+
+# Exercise 10
+
+What is an additional question you could investigate using this data? State the question, provide a visualization that investigates it, and comment on what your visualization shows.
+
+It could be interesting to look at the relation between education level and urban/rural. I would assume that a higher level of education would be more likely in the city.
+
+```{r ex-10}
+
+anes_ex10 <- anes
+anes_ex10$education <- as.factor(anes_ex10$education)
+
+ggplot(anes_ex10, aes(x=urbanrural, fill=education))+
+  geom_bar(position="fill")+
+  labs(
+    x="Place of Residence",
+    y="Cumulative Proportion",
+    title="Education Level/Place of Residence"
+  )+
+  theme_minimal() + theme(panel.grid.minor=element_blank())
+
+```
+
+The box plot shows a high education level in the city, but higher in the suburbs. This makes sense as typically people move from the city to the suburbs when looking to settle down and have a family, perhaps selecting for qualified people with a high level of education. Rural and small towns show lower levels of higher educated residents, perhaps due to the fact that there is more blue collar work. Those who do have a specialised education are likely to move to the city in search of suitable work.
+
+# Exercise 11
+
+Write a brief paragraph summarizing what you found in this lab, what limitations might exist to the data/analyses, and what additional data you would like to have to explore further questions.
+
+The data investigation above showed that education level, place of residence and involvement in hunting/fishing all seem to provide information that can be used to determine the political orientation of a voter. I would be interested in looking more into the degree of correlation between these different variables however, as I believe a some of them are likely to be proxies for each other (as I mentioned above, hunting/fishing participation is likely to be a good proxy for an individual living rurally).
+
+I think it would also be interesting to look into the effect of the mode of data collection on how respondents answer certain questions, especially more controversial ones. I would expect that those who were web only would be more comfortable sharing extreme views. It would also be interesting (though admitedly quite a bit of work) if we could come up with some kind of model that could calculate a political orientation on a 1-7 scale based on responses to the questions to compare with the self reported 1-7 value that the respondent provides.
+
+# 

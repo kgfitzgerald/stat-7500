@@ -1,0 +1,312 @@
+---
+title: "R HW 03: Data Wrangling"
+author: "Michael Sturman"
+date: "`r Sys.Date()`"
+format: 
+  html:
+    self-contained: true
+    toc: true
+    toc_float: true
+    number_section: false
+    highlight: "tango"
+    theme: "cosmo"
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+
+library(tidyverse)
+library(scales)
+library(ggbeeswarm)
+```
+
+# Load Data
+
+```{r load-data, message = F}
+midwest <- ggplot2::midwest
+```
+
+# Exercise 1
+
+> Calculate the number of counties in each state and display your results in descending order of number of counties. Which state has the highest number of counties, and how many? Which state has the lowest number, and how many?
+
+```{r}
+
+midwest |>
+  select(county, state) |> 
+  group_by(state) |>
+  count(sort=TRUE)
+
+```
+
+Illinois has the most counties, with 102. Wisconsin has the least, with 72
+
+# Exercise 2
+
+> While two counties in a given state can’t have the same name, some county names might be shared across states. A classmate says “Look at that, there is a county called \_\_\_ in each state in this dataset!” In a single pipeline, discover all counties that could fill in the blank. Your response should be a data frame with only the county names that could fill in the blank and the number of times they appear in the data, and narrative stating the county names that could fill in this blank.
+
+```{r ex-2}
+midwest |>
+  select(county) |>
+  group_by(county) |>
+  filter(n() == 5) |>
+  distinct()
+```
+
+The question statement specifies that counties in the same state cannot have the same name. Therefore, any county name that appears n=5 times must be occuring once in each state. We select county as that is our column of interest, group by county as that is what we are counting over then filter for county names that appear 5 times. This initial dataframe contains duplicate values as it will include all of the 5 instances of each of the repeat counties, so we then pipe the dataframe into a distinct() method to give out answers: Crawford, Jackson and Monroe.
+
+# Exercise 3
+
+> Consider the box plot below of population densities that has large outliers. For each of the following, answer using a single data wrangling pipeline for each part. Your response should be a data frame with five columns: county name, state name, population density, total population, and area, in this order. If your response has multiple rows, the data frame should be arranged in descending order of population density. Identify the counties with a population density higher than 25,000. Your code must use the filter() function. Identify the county with the highest population density. Your code must use the max() function.
+
+```{r ex-3a}
+#Identify the counties with a population density higher than 25,000
+midwest |>
+  filter(popdensity > 25000) |>
+  select(state, county, popdensity) |>
+  arrange(desc(popdensity))
+```
+
+For the first section, we use the filter() function to filter out counties with a population density less than or equal to 25000. We then use a select() statement to keep our columns of interest - in this case state, county and popdensity (could equally have done this before the filter statement). We then use an arrange statement descending based on population density to order our data.
+
+```{r ex-3b}
+#Identify the county with the highest population density.
+midwest |>
+  select(state, county, popdensity) |>
+  filter(popdensity == max(popdensity)) 
+```
+
+To get the county with the highest pop density, we filter for the situation where popdensity is equal to the maximum popdensity from the dataframe: Cook County Illinois
+
+# Exercise 4
+
+> The plot below displays the distribution of population densities. The following is one acceptable description that touches on the shape, center, and spread of this distribution. Calculate the values that should go into the blanks. “The distribution of population density of counties is unimodal and extremely right-skewed. A typical Midwestern county has population density of \_\_\_\_ people per unit area. The middle 50% of the counties have population densities between \_\_\_\_ to \_\_\_\_ people per unit area.”
+
+```{r ex-4}
+midwest |>
+  select(popdensity) |>
+  summarise(median_popd=quantile(popdensity, c(0.5)),
+            iq_range =abs(quantile(popdensity, c(0.75))-quantile(popdensity, c(0.25))))
+```
+
+Median Population Density - 1156 Inter Quartile Range - 1708
+
+Using the summarise function we are able to apply summary statistics to the data. We do not need to apply any grouping here as the question is concerned with mid-western states as a collective as opposed to individual state statistics. The quantile function can be used to find x percentile values of a data set - the data set values where x% falls below it. The second quartile (more commonly referred to as the median) is a reliable estimate of the "typical midwestern county" due to it's resiliance to skew (a trait not shared by the mean value). The middle 50% is often also referred to as the interquartile range - taken by subtracting the 25% value from the 75% value.
+
+# Exercise 5
+
+> The visualization below shows the proportion of urban (located in metropolitan area) counties in each state. Calculate these proportions in a single data pipeline.
+
+```{r ex-5}
+
+midwest |>
+  mutate(metropolitan = if_else(inmetro==1, "Yes", "No"))|>
+  select(state, metropolitan)|>
+  group_by(state)|>
+  summarise(
+    yes_count = sum(metropolitan == "Yes"),
+    no_count = sum(metropolitan == "No"),
+    proportion_inmetro = yes_count/(yes_count+no_count)
+    
+  )
+    
+# This was my original methodology, got to the same result but without the creation
+# of a new variable requested in the question.
+#midwest |>
+#  select(state, inmetro)|>
+#  group_by(state)|>
+#  summarise(
+#    counties=n(),
+#    metropolitan_counties=sum(inmetro),
+#    proportion_in_city=metropolitan_counties/counties
+#  )
+  
+
+```
+
+First we use the mutate method to define a new variable called metropolitan. This takes a value of "Yes" if inmetro is equal to 1, and "No" otherwise. We select this column and the state column as those are the only variables we are interested here. Grouping by state, we setup some summary statistics - the count of "Yes", the count of "No" and the fraction of the total counties that are "Yes". Comparing to the visualization, the values look to be sensible.
+
+# Dataset #2
+
+```{r}
+nc_county <- read_csv("data/nc-county.csv")
+```
+
+# Exercise 6
+
+> Report the number of rows and columns in nc_county. Then, create a new variable called p_edu_he (short for “percentage of population with higher education”) that is the sum of the percentages of - 25-44-year-olds with some college or an associate degree (p_edu_scnd) - non-degree credentials (p_edu_ndc), - an associate degree (p_edu_assoc), - a bachelor’s degree (p_edu_ba), and - a master’s, professional, or doctoral degree (p_edu_mapl). Store this variable in the nc_county data frame. Confirm the number of rows and columns in nc_county after adding this variable.
+
+```{r ex-6}
+nrow(nc_county)
+ncol(nc_county)
+
+```
+
+100 rows, 22 columns before adding the new column. We expect the number of rows to stay the same when we add in the new column
+
+```{r ex-6 p2}
+
+nc_county$p_edu_he <- nc_county$p_edu_scnd + nc_county$p_edu_ndc + nc_county$p_edu_assoc + nc_county$p_edu_ba + nc_county$p_edu_mapl
+
+nrow(nc_county)
+ncol(nc_county)
+
+```
+
+As expected, after adding the new column we have 100 rows and 23 columns.
+
+```{r ex-6 quick check}
+
+nc_county |> 
+  select(p_edu_he) |> 
+  slice_head(n = 3)
+
+```
+
+# Exercise 7
+
+> In a single pipeline, calculate the - Minimum - First quartile (25th percentile) - Median (50th percentile) - Mean - Third quartile (75th percentile) - Maximum of p_edu_h
+
+```{r ex-7}
+nc_county |>
+  select(p_edu_he)|>
+  summarise(
+    minimum=min(p_edu_he),
+    first_quart=quantile(p_edu_he, c(0.25)),
+    median=quantile(p_edu_he, c(0.5)),
+    mean=mean(p_edu_he),
+    third_quart=quantile(p_edu_he, c(0.75)),
+    maximum=max(p_edu_he)
+  )
+
+```
+
+# Exercise 8
+
+> In a single pipeline, calculate the same statistics as in the previous part, but for each county_type.
+
+```{r}
+
+  nc_county |>
+  select(p_edu_he, county_type)|>
+  group_by(county_type)|>
+  summarise(
+    minimum=min(p_edu_he),
+    first_quart=quantile(p_edu_he, c(0.25)),
+    median=quantile(p_edu_he, c(0.5)),
+    mean=mean(p_edu_he),
+    third_quart=quantile(p_edu_he, c(0.75)),
+    maximum=max(p_edu_he)
+  )
+
+
+```
+
+# Exercise 9
+
+> The plot below shows the distribution of p_edu_he by county_type. In a single pipeline, identify the outliers in the plot and return a data frame with the county name, county type, percentage with higher education. This data frame should be arranged in ascending order of county type and descending order of percentage with higher education.
+
+```{r ex-9}
+nc_county |>
+  group_by(county_type)|>
+  mutate(
+    first_quart=quantile(p_edu_he, c(0.25)),
+    third_quart=quantile(p_edu_he, c(0.75)),
+  ) |>
+  filter(p_edu_he < first_quart | p_edu_he > third_quart)|>
+  select(county_type, county, p_edu_he)|>
+  arrange(county_type, desc(p_edu_he))
+```
+
+What we are looking for is data falling outside of the interquartile range for each given county type. There do not seem to be any outliers for the urban county types, but we should apply the same logic to it for model stability rather than cherry picking out bits of data. This ensures our model is reusable if new data was to come in containing new outliers.
+
+We use the mutate function to create new columns for the first and third quartile, grouped by the county type. We could equally have done this inline with the filtering step, but separating them out improves readability and has a negligible performance effect. We then filter on whether p_edu_he for a given row is less than the first quartile border value, or greater than the third quartile border value. After that, we select the columns of interest - county_type, county and p_edu_he (we don't need the quartiles anymore). Finally, we order by ascending county_type (ascending is the default so no need to specify direction) and descending p_edu_he.
+
+# Exercise 10
+
+> Create a scatter plot with percentage of 25-44 year olds with higher education (p_edu_he) on the x-axis and median household income (median_hh_income) on the y-axis. Describe the relationship between these two variables. In your description, make sure to comment on the direction, form, strength, and any unusual observations. For unusual observations, identify the counties that correspond to these observations, and make sure to include the code you used to identify them as part of your answer. Your code should output the county name, percentage with higher education, and median household income for each unusual observation.
+
+```{r ex-10}
+nc_county <- data.frame(nc_county)
+lin_mod <- lm(median_hh_income~p_edu_he, data=nc_county)
+nc_county$pred_hh_income <- predict(lin_mod, interval="confidence", level=0.95)
+nc_county$pred_hh_resids <- abs(residuals(lin_mod))
+nc_county$biggest_resid <- FALSE
+
+nc_county <- nc_county |>
+  arrange(desc(pred_hh_resids))
+
+number_of_points_to_label <- 10
+nc_county$biggest_resid[1:number_of_points_to_label] <- TRUE
+
+ggplot(nc_county, aes(x=p_edu_he, y=median_hh_income))+
+  geom_point()+
+  geom_text(aes(label=ifelse(biggest_resid==TRUE, county, "")), , nudge_y=1200, nudge_x=0.005, colour="blue", size=3)+
+  geom_ribbon(aes(ymin=pred_hh_income[,"lwr"], ymax=pred_hh_income[,"upr"]), fill="grey", alpha=0.2)+
+  labs(
+    x="Percentage of higher education graduates",
+    y="Median household income"
+  )+
+  theme_minimal() + theme(panel.grid.minor=element_blank())
+
+```
+
+There is a strong, positive correlation observed in the data between the proportion of the population of a county that has a higher education level and the median household income in that county. To label just the extreme outliers we fit the linear model from outside of the gglot sequence instead of from within it. Using the model we calculate residuals as well as upper and lower bounds of the models prediction at the 95% confidence interval (for overlay onto the graph). After ordering by the residuals (descending order), we take the first n many rows and set the biggest_resid column (which I created above and set to false for all rows) equal to true for those rows.
+
+Within the plot, I have some if else logic based on the biggest_resid column to either label a point with the county name, or with a blank string if it is not one of the data points that displays the biggest deviation from the predictions of the linear model. I chose to label the biggest 10 deviations, as this captures all of our outliers well and doesn't stray too much into the data that seems to be in the main cluster (arguably Mitchell, Iredell and Anson are borderline).
+
+```{r}
+nc_county |>
+  filter(biggest_resid==TRUE)|>
+  select(county, county_type, median_hh_income, p_edu_he)
+```
+
+# Exercise 11
+
+> Come up with a question that you could answer with the nc_county data frame and the new p_edu_he variable you created in Question 6 and state it explicitly. Then, answer your question with an appropriate data visualization and/or data transformation pipeline and a brief description of your findings.
+
+```{r ex-11}
+nc_county_11 <- nc_county |>
+                  mutate(
+                    pop_lths = p_edu_lths*pop_2020,
+                    pop_hsged = p_edu_hsged*pop_2020,
+                    pop_scnd = p_edu_scnd*pop_2020,
+                    pop_ndc = p_edu_ndc*pop_2020,
+                    pop_assoc = p_edu_assoc*pop_2020,
+                    pop_ba = p_edu_ba*pop_2020,
+                    pop_mapl = p_edu_mapl*pop_2020
+                  )|>
+                  select(county_type,pop_2020,pop_lths, pop_hsged, pop_scnd, pop_ndc, pop_assoc, pop_ba, pop_mapl)|>
+                  pivot_longer(cols=c(pop_lths, pop_hsged, pop_scnd, pop_ndc, pop_assoc, pop_ba, pop_mapl),
+                               names_to = "educ_level",
+                               values_to = "popn")|>
+                  group_by(county_type, educ_level)|>
+                  summarise(
+                    sum_pop = sum(popn),
+                    .groups='drop'
+                  )
+
+nc_county_11$county_type <- factor(nc_county_11$county_type, levels=c("Urban", "Suburban", "Rural - Metro", "Rural - Non-Metro"))
+nc_county_11$educ_level <- factor(nc_county_11$educ_level, levels=c("pop_lths", "pop_hsged", "pop_scnd","pop_ndc", "pop_assoc","pop_ba","pop_mapl"))
+
+ggplot(nc_county_11, aes(x=county_type, y=sum_pop, fill=educ_level))+
+  geom_col(position="fill")+
+  labs(
+    x="County Type",
+    y="Proportion of Population",
+    title="Education Level Proportions"
+  )
+
+```
+
+I think it would be useful to see a breakdown of the proportions of the population of different county types. While p_edu_h is a useful "birds eye view" I think seeing a visual demonstration of the components that go in to it could give us some added insight into potential education bottlenecks in different regions, or perhaps into the profiles/demands of work done in them.
+
+The first thing I wanted to do here was to calculate the populations that had gone through each level of education from each county, to avoid giving excess weight to the statistics from smaller counties. I did this by multiplying them by the pop_2020 column. Next I selected by columns of interest - the county type and my new population columns, before pivoting the population columns into new rows (I know we haven't done this, but I do it in work using python and was interested in trying it in R). Grouping by county type and our new educ_level column, I summed up the populations to get the total population falling into a given education "bucket" for a given county type.
+
+Next I moved onto plotting, opting for a geom_col plot normalised by the total population as a good solution for giving a visualisation of our percentage breakdowns. I used county type on the x axis, proportion of population on the y, and filled by the education level. Before plotting I converted county_type and educ_level into factors, and reordered them in a way that made sense (in descending degree of urbanisation from left to right on the x axis, and descending level of education going up the stacked plot). I included the high-school diploma and less than high-school diploma populations for completeness, but put them at the top of the stacked plot to make it easier to interpret the higher education region (everything from green down).
+
+The results are interesting. Despite having a relatively similar p_edu_he value, the composition of the urban and suburban higher education bar is quite different. Specifically, masters degrees and beyond are far more common in the city, with bachelors degrees being slightly more common too. The education profile is more similar between Rural - Metro and Rural - Non-Metro, with the metropolitan adjacent regions showing slightly more high level education.
