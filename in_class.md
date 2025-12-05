@@ -89,6 +89,8 @@ Links to all lecture slides and in-class practice code will be provided below.
 ## Week 14
 
 + [SLIDES: R 08 - Web Scraping]({{ site.baseurl }}/assets/R_slides/08-scraping.html)
++ {% include download.html path="assets/in_class_code/week_14_scraping.R" %}
++ {% include download.html path="assets/in_class_code/week_14_scraping.qmd" %}
 
 
 
