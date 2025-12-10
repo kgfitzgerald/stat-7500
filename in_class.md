@@ -92,5 +92,7 @@ Links to all lecture slides and in-class practice code will be provided below.
 + {% include download.html path="assets/in_class_code/week_14_scraping.R" %}
 + {% include download.html path="assets/in_class_code/week_14_scraping.qmd" %}
 
+## Week 15
 
-
++ [SLIDES: R 09 - Additional Tools & Resources]({{ site.baseurl }}/assets/R_slides/09-parting-thoughts.html)
++ [Communal Cheat Sheet of Useful R Functions](https://docs.google.com/document/d/1K3Anyz4Qq79xUBjIkzSlQhjisbhu6cIPY-GMSp_zcq0/edit?usp=sharing)
